@@ -3,7 +3,7 @@
 using namespace std;
 #include "ZorkUL.h"
 
-int main(int argc, char argv[]) {
+int main(int argc, char *argv[]) {
 	ZorkUL temp;
 	temp.play();
 	return 0;
@@ -14,7 +14,7 @@ ZorkUL::ZorkUL() {
 }
 
 void ZorkUL::createRooms()  {
-	Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
+    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *nr;           //--add a new room called nr
 
 	a = new Room("a");
         a->addItem(new Item("x", 1, 11));
@@ -29,6 +29,7 @@ void ZorkUL::createRooms()  {
 	g = new Room("g");
 	h = new Room("h");
 	i = new Room("i");
+     nr = new Room("nr");                                     //--create a newRoom object
 
 //             (N, E, S, W)
 	a->setExits(f, b, d, c);
@@ -40,6 +41,7 @@ void ZorkUL::createRooms()  {
 	g->setExits(NULL, NULL, NULL, f);
 	h->setExits(NULL, f, NULL, NULL);
     i->setExits(NULL, d, NULL, NULL);
+    nr->setExits(d, NULL, NULL, NULL);                    //--setExits nr
 
         currentRoom = a;
 }
@@ -98,6 +100,10 @@ bool ZorkUL::processCommand(Command command) {
 		cout << "         |         " << endl;
 		cout << "         |         " << endl;
 		cout << "[i] --- [d] --- [e]" << endl;
+        cout << "         |         " << endl;            //-add nr in the map
+        cout << "         |         " << endl;            //^
+        cout << "        [nr]       " << endl;            //^
+
 		}
 
 	else if (commandWord.compare("go") == 0)
