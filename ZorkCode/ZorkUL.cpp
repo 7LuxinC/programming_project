@@ -110,17 +110,10 @@ bool ZorkUL::processCommand(Command command) {
         cout << "[h] --- [f] --- [g]" << endl;
 	cout << "         |         " << endl;
         cout << "         |         " << endl;
-<<<<<<< HEAD
         cout << "[c] --- [a] --- [b]" << endl;
-		cout << "         |         " << endl;
-		cout << "         |         " << endl;
-		cout << "[i] --- [d] --- [e]" << endl;
-=======
-	cout << "[c] --- [a] --- [b]" << endl;
 	cout << "         |         " << endl;
 	cout << "         |         " << endl;
 	cout << "[i] --- [d] --- [e]" << endl;
->>>>>>> 1eb99454655353f218ee0b17e3f0c3cf3b6d451e
         cout << "         |         " << endl;            //-add nr in the map
         cout << "         |         " << endl;            //^
         cout << "        [nr]       " << endl;            //^
