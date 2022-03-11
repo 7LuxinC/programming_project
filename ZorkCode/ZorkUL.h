@@ -13,11 +13,13 @@ class ZorkUL {
 private:
 	Parser parser;
 	Room *currentRoom;
+    Room *rooms[10];
 	void createRooms();
 	void printWelcome();
 	bool processCommand(Command command);
 	void printHelp();
 	void goRoom(Command command);
+    void teleport();
     void createItems();
     void displayItems();
 

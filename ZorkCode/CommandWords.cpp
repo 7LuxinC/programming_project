@@ -14,6 +14,7 @@ CommandWords::CommandWords() {
 		validCommands.push_back("map");
 		validCommands.push_back("take");
 		validCommands.push_back("put");
+        validCommands.push_back("teleport");                    //--add a new command called teleport
 	}
 }
 
