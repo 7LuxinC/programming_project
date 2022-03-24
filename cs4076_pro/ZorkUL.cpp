@@ -1,12 +1,20 @@
 #include <iostream>
+#include <QApplication>
 
 using namespace std;
 #include "ZorkUL.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[]) {
-	ZorkUL temp;
-	temp.play();
-	return 0;
+    QApplication app(argc,argv);
+    MainWindow w;
+
+    //ZorkUL temp;
+    //temp.play();
+
+   w.show();    //...show the main window
+   return app.exec();
+
 }
 
 ZorkUL::ZorkUL() {
@@ -108,12 +116,12 @@ bool ZorkUL::processCommand(Command command) {
 	else if (commandWord.compare("map") == 0)
 		{
         cout << "[h] --- [f] --- [g]" << endl;
-	cout << "         |         " << endl;
+        cout << "         |         " << endl;
         cout << "         |         " << endl;
         cout << "[c] --- [a] --- [b]" << endl;
-	cout << "         |         " << endl;
-	cout << "         |         " << endl;
-	cout << "[i] --- [d] --- [e]" << endl;
+		cout << "         |         " << endl;
+		cout << "         |         " << endl;
+		cout << "[i] --- [d] --- [e]" << endl;
         cout << "         |         " << endl;            //-add nr in the map
         cout << "         |         " << endl;            //^
         cout << "        [nr]       " << endl;            //^
