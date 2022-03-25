@@ -1,5 +1,6 @@
 #include <iostream>
 #include <QApplication>
+#include <string>
 
 using namespace std;
 #include "ZorkUL.h"
@@ -178,9 +179,11 @@ bool ZorkUL::processCommand(Command command) {
 	return false;
 }
 /** COMMANDS **/
-void ZorkUL::printHelp() {
-	cout << "valid inputs are; " << endl;
-	parser.showCommands();
+
+string ZorkUL::printHelp() {
+    //cout << "valid inputs are; " << endl;
+    string infos = "Valid inputs are: \n" + parser.showCommands();
+    return infos;
 
 }
 
