@@ -21,9 +21,9 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_quit_clicked();
-    void on_message_clicked();
-    void on_info_clicked();
+    void on_quitBtn_clicked();
+    void on_messageBtn_clicked();
+    void on_infoBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
