@@ -6,13 +6,22 @@
 #include <string>
 #include <QString>
 #include <QtDebug>
-
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //upload map picture in the mainwindow screen
+    QPixmap pix(":/resources/img/map.png");
+    ui -> mapImg -> setPixmap(pix);   //mapImg = label
+
+
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -21,7 +30,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_message_clicked()
+void MainWindow::on_messageBtn_clicked()
 {
     //this =this class
     QMessageBox::about(this,"---WELCOME ヾ(*´▽‘*)ﾉ---", "You are now standing in the city of loswifire and you are a messenger guarding the five-colored spirit stones."
@@ -32,7 +41,7 @@ void MainWindow::on_message_clicked()
 }
 
 
-void MainWindow::on_info_clicked()
+void MainWindow::on_infoBtn_clicked()
 {
    //convert string to QString to met the infomation method
    QString qstr = QString::fromStdString(zork->ZorkUL::printHelp());
@@ -42,7 +51,7 @@ void MainWindow::on_info_clicked()
 
 
 
-void MainWindow::on_quit_clicked()
+void MainWindow::on_quitBtn_clicked()
 {
     //ask the player if he want to quit the game
     QMessageBox::StandardButtons reply = QMessageBox::question(this,"Quit the program","Are you sure you want to quit?",QMessageBox::Yes | QMessageBox::No);
@@ -50,8 +59,10 @@ void MainWindow::on_quit_clicked()
     if(reply == QMessageBox::Yes) {
         QApplication::quit();
     }else {
-        qDebug();
+        qDebug() << "Stay in the program";
     }
 }
+
+
 
 

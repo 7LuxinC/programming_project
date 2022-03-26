@@ -40,3 +40,6 @@ DISTFILES += \
     README.md \
     cs4076_project.pro.user \
     index.txt
+
+RESOURCES += \
+    resources.qrc
