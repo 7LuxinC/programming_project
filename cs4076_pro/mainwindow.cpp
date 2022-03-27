@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix(":/resources/img/map.png");
     ui -> mapImg -> setPixmap(pix);   //mapImg = label
 
-
+    zork = new ZorkUL();
+    QString qstr = QString::fromStdString(zork ->printWelcome());
+    ui ->output -> setText(qstr);
 
 
 
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete zork;
 }
 
 

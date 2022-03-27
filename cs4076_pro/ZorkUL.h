@@ -17,7 +17,7 @@ private:
 	Room *currentRoom;
     Room *rooms[10];
 	void createRooms();
-	void printWelcome();
+
 	bool processCommand(Command command); 
 	void goRoom(Command command);
     void teleport();
@@ -29,7 +29,7 @@ public:
 	void play();
     string go(string direction);
     string printHelp();
-
+    string printWelcome();
 
 };
 

@@ -91,12 +91,16 @@ void ZorkUL::play() {
 	cout << endl;
 	cout << "end" << endl;
 }
+string ZorkUL::printWelcome() {
+    //cout << "start"<< endl;
+    //cout << "info for help"<< endl;
+    //cout << endl;
+    //cout << currentRoom->longDescription() << endl;
+    string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation. \n\nCurrent Location: \n";
+    string curLocation = currentRoom -> longDescription();
+    welcome = welcome + curLocation + "\n";
 
-void ZorkUL::printWelcome() {
-	cout << "start"<< endl;
-	cout << "info for help"<< endl;
-	cout << endl;
-	cout << currentRoom->longDescription() << endl;
+    return welcome;
 }
 
 /**
