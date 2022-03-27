@@ -24,56 +24,56 @@ ZorkUL::ZorkUL() {
 }
 
 void ZorkUL::createRooms()  {
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *nr;           //--add a new room called nr
+    Room *mainland, *farm, *mysWood, *river, *cave, *forest, *volcano, *sky, *cliff;
 
 
-    a = new Room("a", ":/resources/img/mainland.jpg");
-        a->addItem(new Item("x", 1, 11));
-        a->addItem(new Item("y", 2, 22));
+    mainland = new Room("mainland", ":/resources/img/mainland.jpg");
+        mainland->addItem(new Item("x", 1, 11));
+        mainland->addItem(new Item("y", 2, 22));
 
 
-    b = new Room("b",":/resources/img/cliff.jpg");
-        b->addItem(new Item("xx", 3, 33));
-        b->addItem(new Item("yy", 4, 44));
+   farm = new Room("farm",":/resources/img/farm.jpg");
+       farm->addItem(new Item("xx", 3, 33));
+       farm->addItem(new Item("yy", 4, 44));
 
-    c = new Room("c",":/resources/img/dark_cave.jpg");
+    mysWood = new Room("mysWood",":/resources/img/mysterious_wood.jpg");
 
-    d = new Room("d",":/resources/img/mainland.jpg");
-    e = new Room("e",":/resources/img/farm.jpg");
-    f = new Room("f",":/resources/img/mysterious_wood.jpg");
-    g = new Room("g",":/resources/img/sky_city.jpg");
-    h = new Room("h",":/resources/img/riverside.jpg");
-    i = new Room("i",":/resources/img/volcano.jpg");
+    river = new Room("river",":/resources/img/riverside.jpg");
+    cave = new Room("cave",":/resources/img/dark_cave.jpg");
+    forest = new Room("forest",":/resources/img/forest.jpg");
+    volcano = new Room("volcano",":/resources/img/volcano.jpg");
+    sky = new Room("sky",":/resources/img/sky_city.jpg");
+    cliff = new Room("cliff",":/resources/img/cliff.jpg");
 
-    nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
+   //nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
 
    //--add all the room to pointer arrays
-    rooms[0] = a;
-    rooms[1] = b;
-    rooms[2] = c;
-    rooms[3] = d;
-    rooms[4] = e;
-    rooms[5] = f;
-    rooms[6] = g;
-    rooms[7] = h;
-    rooms[8] = i;
-    rooms[9] = nr;
+    rooms[0] = mainland;
+    rooms[1] = farm;
+    rooms[2] = mysWood;
+    rooms[3] = river;
+    rooms[4] = cave;
+    rooms[5] = forest ;
+    rooms[6] = volcano;
+    rooms[7] = sky;
+    rooms[8] = cliff;
+
 
 
 
 //             (N, E, S, W)
-	a->setExits(f, b, d, c);
-	b->setExits(NULL, NULL, NULL, a);
-	c->setExits(NULL, a, NULL, NULL);
-	d->setExits(a, e, NULL, i);
-	e->setExits(NULL, NULL, NULL, d);
-	f->setExits(NULL, g, a, h);
-	g->setExits(NULL, NULL, NULL, f);
-	h->setExits(NULL, f, NULL, NULL);
-     	i->setExits(NULL, d, NULL, NULL);
-    	nr->setExits(d, NULL, NULL, NULL);                    //--setExits nr
+    mainland->setExits(sky, farm, cave, NULL);
+    farm->setExits(cliff, mysWood, NULL, mainland);
+    mysWood->setExits(NULL, NULL, river, farm);
+    river->setExits(mysWood, NULL, NULL, NULL);
+    cave->setExits(mainland, NULL, NULL, forest);
+    forest->setExits(NULL,cave, NULL, NULL);
+    volcano->setExits(NULL, sky, NULL, NULL);
+    sky->setExits(NULL, cliff, mainland, volcano);
+    cliff->setExits(NULL, NULL, farm, sky);
 
-        currentRoom = a;
+
+        currentRoom = mainland;
 }
 
 
@@ -134,16 +134,18 @@ bool ZorkUL::processCommand(Command command) {
 
 	else if (commandWord.compare("map") == 0)
 		{
-        cout << "[h] --- [f] --- [g]" << endl;
-        cout << "         |         " << endl;
-        cout << "         |         " << endl;
-        cout << "[c] --- [a] --- [b]" << endl;
-		cout << "         |         " << endl;
-		cout << "         |         " << endl;
-		cout << "[i] --- [d] --- [e]" << endl;
-        cout << "         |         " << endl;            //-add nr in the map
-        cout << "         |         " << endl;            //^
-        cout << "        [nr]       " << endl;            //^
+        cout << "[Volcano] ---[Sky World] ----- [Cliff]                       " << endl;
+        cout << "                 |                |                          " << endl;
+        cout << "                 |                |                          " << endl;
+        cout << "             [Main Land] ----- [farm] --- [Mysterious wood]  " << endl;
+        cout << "                 |                             |             " << endl;
+        cout << "                 |                             |             " << endl;
+        cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
+
+
+        //cout << "         |         " << endl;            //-add nr in the map
+        //cout << "         |         " << endl;            //^
+        //cout << "        [nr]       " << endl;            //^
 
 		}
 

@@ -87,6 +87,9 @@ void MainWindow::on_northBtn_clicked()
     QString s = toQstr(zork ->go("north"));
     ui -> output ->setText(s);
 
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
+
 }
 
 
@@ -116,7 +119,7 @@ void MainWindow::on_west_clicked()
 
 void MainWindow::on_southBtn_clicked()
 {
-    QString s = toQstr(zork ->go("north"));
+    QString s = toQstr(zork ->go("south"));
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
