@@ -18,10 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix(":/resources/img/map.png");
     ui -> mapImg -> setPixmap(pix);   //mapImg = label
 
+
+
+
+
     zork = new ZorkUL();
     QString qstr = QString::fromStdString(zork ->printWelcome());
     ui ->output -> setText(qstr);
 
+
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
 
 
 }
@@ -32,6 +39,11 @@ MainWindow::~MainWindow()
     delete zork;
 }
 
+//change any string to Qstring
+QString MainWindow::toQstr(string str){
+    QString toQstr = QString::fromStdString(str);
+    return toQstr;
+}
 
 void MainWindow::on_messageBtn_clicked()
 {
@@ -68,4 +80,59 @@ void MainWindow::on_quitBtn_clicked()
 
 
 
+
+
+void MainWindow::on_northBtn_clicked()
+{
+    QString s = toQstr(zork ->go("north"));
+    ui -> output ->setText(s);
+
+}
+
+
+void MainWindow::on_eastBtn_clicked()
+{
+    QString s = toQstr(zork ->go("east"));
+    ui -> output ->setText(s);
+
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
+
+}
+
+
+
+void MainWindow::on_west_clicked()
+{
+    QString s = toQstr(zork ->go("west"));
+    ui -> output ->setText(s);
+
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
+}
+
+
+
+
+void MainWindow::on_southBtn_clicked()
+{
+    QString s = toQstr(zork ->go("north"));
+    ui -> output ->setText(s);
+
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
+}
+
+
+
+
+
+void MainWindow::on_teleportBtn_clicked()
+{
+    QString s = toQstr(zork -> teleport());
+    ui -> output ->setText(s);
+
+    QPixmap pix1(toQstr(zork ->getPic()));
+    ui -> imgLb -> setPixmap(pix1);
+}
 

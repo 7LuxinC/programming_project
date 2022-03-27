@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/resources">
         <file>img/map.png</file>
+        <file>img/mainland.jpg</file>
+        <file>img/cliff.jpg</file>
+        <file>img/dark_cave.jpg</file>
+        <file>img/farm.jpg</file>
+        <file>img/forest.jpg</file>
+        <file>img/mysterious_wood.jpg</file>
+        <file>img/riverside.jpg</file>
+        <file>img/sky_city.jpg</file>
+        <file>img/volcano.jpg</file>
     </qresource>
 </RCC>
