@@ -11,16 +11,17 @@ using namespace std;
 
 class ZorkUL {
 
+static int const arrSize = 10;  // room array of pointer
 
 private:
 	Parser parser;
 	Room *currentRoom;
-    Room *rooms[10];
+    Room *rooms[arrSize];
 	void createRooms();
 
 	bool processCommand(Command command); 
 	void goRoom(Command command);
-    void teleport();
+
     void createItems();
     void displayItems();
 
@@ -30,7 +31,8 @@ public:
     string go(string direction);
     string printHelp();
     string printWelcome();
-
+    string teleport();
+    string getPic();
 };
 
 

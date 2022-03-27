@@ -1,6 +1,7 @@
 #include <iostream>
 #include <QApplication>
 #include <string>
+#include <QPixmap>
 
 using namespace std;
 #include "ZorkUL.h"
@@ -26,21 +27,25 @@ void ZorkUL::createRooms()  {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *nr;           //--add a new room called nr
 
 
-	a = new Room("a");
+    a = new Room("a", ":/resources/img/mainland.jpg");
         a->addItem(new Item("x", 1, 11));
         a->addItem(new Item("y", 2, 22));
-	b = new Room("b");
+
+
+    b = new Room("b",":/resources/img/cliff.jpg");
         b->addItem(new Item("xx", 3, 33));
         b->addItem(new Item("yy", 4, 44));
-    c = new Room("c");
-	d = new Room("d");
-	e = new Room("e");
-	f = new Room("f");
-	g = new Room("g");
-	h = new Room("h");
-	i = new Room("i");
 
-    nr = new Room("nr");                                     //--create a newRoom object
+    c = new Room("c",":/resources/img/dark_cave.jpg");
+
+    d = new Room("d",":/resources/img/mainland.jpg");
+    e = new Room("e",":/resources/img/farm.jpg");
+    f = new Room("f",":/resources/img/mysterious_wood.jpg");
+    g = new Room("g",":/resources/img/sky_city.jpg");
+    h = new Room("h",":/resources/img/riverside.jpg");
+    i = new Room("i",":/resources/img/volcano.jpg");
+
+    nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
 
    //--add all the room to pointer arrays
     rooms[0] = a;
@@ -53,6 +58,8 @@ void ZorkUL::createRooms()  {
     rooms[7] = h;
     rooms[8] = i;
     rooms[9] = nr;
+
+
 
 //             (N, E, S, W)
 	a->setExits(f, b, d, c);
@@ -68,6 +75,8 @@ void ZorkUL::createRooms()  {
 
         currentRoom = a;
 }
+
+
 
 /**
  *  Main play routine.  Loops until end of play.
@@ -97,10 +106,15 @@ string ZorkUL::printWelcome() {
     //cout << endl;
     //cout << currentRoom->longDescription() << endl;
     string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation. \n\nCurrent Location: \n";
-    string curLocation = currentRoom -> longDescription();
-    welcome = welcome + curLocation + "\n";
+    string curLoc = currentRoom -> longDescription();
+    welcome = welcome + curLoc + "\n";
 
     return welcome;
+}
+
+string ZorkUL::getPic(){
+    string picpath = currentRoom ->getImg();
+    return picpath;
 }
 
 /**
@@ -216,7 +230,7 @@ string ZorkUL::go(string direction) {
 	//Move to the next room
 	Room* nextRoom = currentRoom->nextRoom(direction);
 	if (nextRoom == NULL)
-		return("direction null");
+        return("*****Invalid direction,try different ways!*****");
 	else
 	{
 		currentRoom = nextRoom;
@@ -224,12 +238,13 @@ string ZorkUL::go(string direction) {
 	}
 }
 
-void ZorkUL::teleport(){
+string ZorkUL::teleport(){
     srand(time(0));          //--initalize random number generator
 
     int i = rand() % 10;
     currentRoom = rooms[i];
 
+    return currentRoom -> longDescription();
 }
 
 
