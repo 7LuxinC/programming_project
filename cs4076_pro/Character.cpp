@@ -1,23 +1,36 @@
-/*#include "Character.h"
+#include "Character.h"
+#include <vector>
 
-Characterx::Characterx(string description) {
+Character::Character(string description) {
 	this->description = description;
 }
-void Characterx::addItem(Item &item) {
-    itemsInCharacter.push_back(item);
-}
-void Characterx::addItem(Item *item) {
-    itemsInCharacter.push_back(*item);
+
+
+void Character::addItems(Item *item) {
+
+    itemsInCharacter.push_back(item->getShortDescription());
     delete item;
 }
-string Characterx::longDescription()
+
+string Character::getShortDescription(){
+    return this -> description;
+}
+
+
+string Character::getLongDescription()
 {
   string ret = this->description;
   ret += "\n Item list:\n";
-  for (vector<Item>::iterator i = itemsInCharacter.begin(); i != itemsInCharacter.end(); i++)
-    ret += "\t"+ (*i).getLongDescription() + "\n";
+
+  int itemSize = itemsInCharacter.size();
+  string i = "";
+
+  for (int i = 0; i < itemSize; i++){
+
+    ret += "\t"+ itemsInCharacter.at(i) + "\n";
+  }
   return ret;
 }
-*/
+
 
 
