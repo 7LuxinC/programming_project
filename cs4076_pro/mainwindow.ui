@@ -81,9 +81,9 @@
    <widget class="QLabel" name="mapImg">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>340</y>
-      <width>431</width>
+      <x>440</x>
+      <y>360</y>
+      <width>411</width>
       <height>221</height>
      </rect>
     </property>
@@ -93,9 +93,6 @@
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
     </property>
-    <property name="pixmap">
-     <pixmap>img/map.png</pixmap>
-    </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
@@ -103,9 +100,9 @@
    <widget class="QPushButton" name="collectBtn">
     <property name="geometry">
      <rect>
-      <x>468</x>
-      <y>280</y>
-      <width>361</width>
+      <x>30</x>
+      <y>320</y>
+      <width>351</width>
       <height>29</height>
      </rect>
     </property>
@@ -113,16 +110,16 @@
      <font/>
     </property>
     <property name="text">
-     <string>COLLECT</string>
+     <string> COLLECT A ITEM</string>
     </property>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>350</y>
-      <width>351</width>
-      <height>221</height>
+      <x>30</x>
+      <y>370</y>
+      <width>371</width>
+      <height>191</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -301,6 +298,29 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>280</y>
+      <width>371</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>320</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>====&gt;&gt;&gt;&gt;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -14,6 +14,12 @@ string Room::getImg(){
     return this->imgPath;
 }
 
+int Room::getItemSize(){
+    int sum = itemsInRoom.size();
+    return sum;
+}
+
+
 
 void Room::setExits(Room *north, Room *east, Room *south, Room *west) {
 	if (north != NULL)
@@ -31,7 +37,7 @@ string Room::shortDescription() {
 }
 
 string Room::longDescription() {
-	return "room = " + description + ".\n" + displayItem() + exitString();
+    return "Current location = " + description + ".\n" + displayItem() + exitString();
 }
 
 string Room::exitString() {
@@ -56,42 +62,6 @@ void Room::addItem(Item *inItem) {
     itemsInRoom.push_back(*inItem);
 }
 
-/*
-string Room::setPic(){
-    /*string img = "";
-
-    for(std::size_t i = 0; i < rmImgs.size(); i++){
-        if(i ==  (size_t)numRm){
-            img = rmImgs.at(i);
-        }
-    }
-
-string str ;
-
-    if(this -> description == "a"){
-      str = rmImgs.at(0);
-    }else if(this -> description == "b"){
-        str = rmImgs.at(1);
-    }else if(this -> description == "c"){
-        str = rmImgs.at(2);
-    }else if(this -> description == "d"){
-        str = rmImgs.at(3);
-    }else if(this -> description == "e"){
-        str = rmImgs.at(4);
-    }else if(this -> description == "f"){
-        str = ":/resources/img/mysterious_wood.jpg";
-    }else if(this -> description == "g"){
-        str = rmImgs.at(6);
-    }else if(this -> description == "h"){
-        str = rmImgs.at(7);
-    }else if (this -> description == "i"){
-        str = rmImgs.at(8);
-    }
-
-return str;
-}
-*/
-
 
 string Room::displayItem() {
 
@@ -108,6 +78,7 @@ string Room::displayItem() {
             }
         }
     return tempString;
+
     }
 
 int Room::numberOfItems() {
@@ -120,7 +91,7 @@ int Room::isItemInRoom(string inString)
     if (itemsInRoom.size() < 1) {
         return false;
         }
-    else if (itemsInRoom.size() > 0) {
+    else if (hasItem()) {
        int x = (0);
         for (int n = sizeItems; n > 0; n--) {
             // compare inString with short description
@@ -136,5 +107,25 @@ int Room::isItemInRoom(string inString)
 }
 
 
+bool Room::hasItem(){
+    if(itemsInRoom.size() > 0){
+        return true;
+    }
+
+    return false;
+}
+
+string Room::getItem(int index){
+    int itemSize = itemsInRoom.size();
+    string itemname = "";
+
+    for(int i = 0; i < itemSize; i++){
+        if(i == index){
+            itemname = itemsInRoom[i].getShortDescription();
+        }
+    }
+
+    return itemname;
+}
 
 

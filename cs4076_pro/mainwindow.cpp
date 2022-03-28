@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
+        listItem();
 
 }
 
@@ -44,6 +45,7 @@ QString MainWindow::toQstr(string str){
     QString toQstr = QString::fromStdString(str);
     return toQstr;
 }
+
 
 void MainWindow::on_messageBtn_clicked()
 {
@@ -84,22 +86,30 @@ void MainWindow::on_quitBtn_clicked()
 
 void MainWindow::on_northBtn_clicked()
 {
-    QString s = toQstr(zork ->go("north"));
+    QString s = toQstr( zork ->go("north"));
+
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
+
+    hasTakeBtn(s);
 
 }
 
 
 void MainWindow::on_eastBtn_clicked()
 {
-    QString s = toQstr(zork ->go("east"));
+    QString s = toQstr( zork ->go("east"));
+
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
+
+    hasTakeBtn(s);
+
+
 
 }
 
@@ -107,12 +117,17 @@ void MainWindow::on_eastBtn_clicked()
 
 void MainWindow::on_west_clicked()
 {
-    QString s = toQstr(zork ->go("west"));
+    QString s = toQstr( zork ->go("west"));
+
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
+
+    hasTakeBtn(s);
+
 }
+
 
 
 
@@ -120,10 +135,15 @@ void MainWindow::on_west_clicked()
 void MainWindow::on_southBtn_clicked()
 {
     QString s = toQstr(zork ->go("south"));
+
+
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
+
+    hasTakeBtn(s);
+
 }
 
 
@@ -132,10 +152,63 @@ void MainWindow::on_southBtn_clicked()
 
 void MainWindow::on_teleportBtn_clicked()
 {
-    QString s = toQstr(zork -> teleport());
+    QString s = toQstr("Zfffffft transfer completed.~~~\n\nCurrent Location:\n"  + zork -> teleport());
+
     ui -> output ->setText(s);
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
+
+    hasTakeBtn(s);
+
+
+}
+
+
+
+
+void MainWindow::hasTakeBtn(QString qs){
+
+ui -> listWidget ->clear();
+    if(zork ->hasItems()){
+        ui ->collectBtn->setEnabled(true);
+        listItem();
+    }else {
+        ui -> collectBtn -> setEnabled(false);
+
+    }
+
+    if(qs == toQstr("*****Invalid direction,try different ways!*****")){
+        ui->listWidget -> clear();
+    }
+}
+
+
+void MainWindow::listItem(){
+
+
+    int itemsize = zork -> getCurrentRoom()->getItemSize();
+    for(int i = 0 ; i < itemsize; i++){
+        QString itemlist = toQstr(zork ->showItems(i));
+        ui -> listWidget ->addItem(itemlist);
+
+
+    }
+
+}
+
+void MainWindow::collectItems(){
+    QListWidgetItem *it = ui ->listWidget->takeItem(ui ->listWidget ->currentRow());
+    delete it;    //it won't delete the object itself
+
+
+}
+
+
+
+
+void MainWindow::on_collectBtn_clicked()
+{
+    collectItems();
 }
 

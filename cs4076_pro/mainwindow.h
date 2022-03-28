@@ -34,13 +34,18 @@ private slots:
 
     void on_teleportBtn_clicked();
 
+    void listItem();
+
+    void on_collectBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     ZorkUL *zork;
-    Parser parser;
-
+   
     QString toQstr(string str);
 
+    void hasTakeBtn(QString qs);
+    void collectItems();
 
 
 };

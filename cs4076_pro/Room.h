@@ -19,7 +19,7 @@ private:
 	map<string, Room*> exits;
 	string exitString();
     vector <Item> itemsInRoom;
-    vector <string> rmImgs;         //room images
+
 
 
 public:
@@ -35,6 +35,10 @@ public:
     void removeItemFromRoom(int location);
    //string setPic();
    string getImg();
+   bool hasItem();
+   string getItem(int index);
+
+   int getItemSize();
 };
 
 #endif

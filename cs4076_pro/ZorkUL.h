@@ -11,7 +11,7 @@ using namespace std;
 
 class ZorkUL {
 
-static int const arrSize = 10;  // room array of pointer
+static int const arrSize = 9;  // room array of pointer
 
 private:
 	Parser parser;
@@ -20,7 +20,7 @@ private:
 	void createRooms();
 
 	bool processCommand(Command command); 
-	void goRoom(Command command);
+
 
     void createItems();
     void displayItems();
@@ -33,6 +33,10 @@ public:
     string printWelcome();
     string teleport();
     string getPic();
+    string showItems(int index);
+    void goRoom(Command command);
+   bool hasItems();
+   Room* getCurrentRoom();
 };
 
 

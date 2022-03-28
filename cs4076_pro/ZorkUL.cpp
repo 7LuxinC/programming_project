@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <string>
 #include <QPixmap>
+#include <stdlib.h>
 
 using namespace std;
 #include "ZorkUL.h"
@@ -28,8 +29,8 @@ void ZorkUL::createRooms()  {
 
 
     mainland = new Room("mainland", ":/resources/img/mainland.jpg");
-        mainland->addItem(new Item("x", 1, 11));
-        mainland->addItem(new Item("y", 2, 22));
+        mainland->addItem(new Item("x"));
+        mainland->addItem(new Item("y"));
 
 
    farm = new Room("farm",":/resources/img/farm.jpg");
@@ -76,6 +77,9 @@ void ZorkUL::createRooms()  {
         currentRoom = mainland;
 }
 
+Room* ZorkUL::getCurrentRoom(){
+    return currentRoom;
+}
 
 
 /**
@@ -105,7 +109,7 @@ string ZorkUL::printWelcome() {
     //cout << "info for help"<< endl;
     //cout << endl;
     //cout << currentRoom->longDescription() << endl;
-    string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation. \n\nCurrent Location: \n";
+    string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation.\n\n";
     string curLoc = currentRoom -> longDescription();
     welcome = welcome + curLoc + "\n";
 
@@ -243,10 +247,19 @@ string ZorkUL::go(string direction) {
 string ZorkUL::teleport(){
     srand(time(0));          //--initalize random number generator
 
-    int i = rand() % 10;
+    int i = rand() % 9;
     currentRoom = rooms[i];
 
     return currentRoom -> longDescription();
+}
+
+bool ZorkUL::hasItems(){
+    return currentRoom -> hasItem();
+}
+
+string ZorkUL::showItems(int index){
+
+    return currentRoom ->getItem(index);
 }
 
 

@@ -11,6 +11,8 @@ Item::Item(string inDescription) {
 	description = inDescription;
 }
 
+
+
 void Item::setWeight(int inWeightGrams)
 {
     if (inWeightGrams > 9999 || inWeightGrams < 0)
