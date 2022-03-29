@@ -198,8 +198,27 @@ void MainWindow::listItem(){
 }
 
 void MainWindow::collectItems(){
-    QListWidgetItem *it = ui ->listWidget->takeItem(ui ->listWidget ->currentRow());
+
+    int rowOfItems = ui -> listWidget -> currentRow();
+
+    QListWidgetItem *it = ui ->listWidget->takeItem(rowOfItems);  //get the selected item in list
+
+
+    string foundItem = zork ->getCurrentRoom()->searchItem(rowOfItems);       //search matching item in room
+
+
+    zork ->getCharacter()->addItems(foundItem);      //add item in player's bag
+    zork ->getCurrentRoom() ->removeItemFromRoom(rowOfItems);   //remove the item in room
+
+    //details:
+    string currItemDetail = zork -> getCurrentRoom() ->longDescription();
+    ui ->output -> append(toQstr("\n" + currItemDetail));
+    showItemsInBag();
+
+
     delete it;    //it won't delete the object itself
+
+
 
 
 }
@@ -210,5 +229,9 @@ void MainWindow::collectItems(){
 void MainWindow::on_collectBtn_clicked()
 {
     collectItems();
+}
+
+void MainWindow::showItemsInBag(){
+     ui -> output -> append(toQstr(zork ->getCharacter() ->getLongDescription()));
 }
 

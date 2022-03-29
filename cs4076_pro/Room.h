@@ -8,6 +8,7 @@
 
 #include "item.h"
 
+
 using namespace std;
 using std::vector;
 
@@ -32,13 +33,15 @@ public:
     void addItem(Item *inItem);
     string displayItem();
     int isItemInRoom(string inString);
-    void removeItemFromRoom(int location);
+   void removeItemFromRoom(int index);
    //string setPic();
    string getImg();
    bool hasItem();
    string getItem(int index);
 
    int getItemSize();
+
+   string searchItem(int index);
 };
 
 #endif

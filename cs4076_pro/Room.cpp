@@ -1,3 +1,4 @@
+
 #include "Room.h"
 #include "Command.h"
 
@@ -60,6 +61,19 @@ void Room::addItem(Item *inItem) {
     //cout <<endl;
     //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
+}
+
+void Room::removeItemFromRoom(int index){
+    int i = 0;
+
+    vector<Item>::iterator it;
+
+    for(it = itemsInRoom.begin(); it != itemsInRoom.end(); it++,i++){
+        if(i == index){
+            itemsInRoom.erase(it);
+            break;
+        }
+    }
 }
 
 
@@ -127,5 +141,22 @@ string Room::getItem(int index){
 
     return itemname;
 }
+
+string Room::searchItem(int index){
+    string str = "";
+    int i = 0;
+
+    vector<Item>::iterator it;
+
+    for(it = itemsInRoom.begin(); it != itemsInRoom.end(); it++,i++){
+        if(i == index){
+            str = itemsInRoom.at(i).getShortDescription();
+
+        }
+    }
+    return str;
+}
+
+
 
 

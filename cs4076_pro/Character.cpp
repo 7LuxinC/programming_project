@@ -1,15 +1,17 @@
 #include "Character.h"
 #include <vector>
 
-Character::Character(string description) {
-	this->description = description;
+Character::Character() {
+
 }
 
 
-void Character::addItems(Item *item) {
+void Character::addItems(string description) {
 
-    itemsInCharacter.push_back(item->getShortDescription());
-    delete item;
+//    this->description = description;
+
+    itemsInCharacter.push_back(description);
+
 }
 
 string Character::getShortDescription(){
@@ -20,7 +22,7 @@ string Character::getShortDescription(){
 string Character::getLongDescription()
 {
   string ret = this->description;
-  ret += "\n Item list:\n";
+  ret += "\n *** Item in your Bag ***\n";
 
   int itemSize = itemsInCharacter.size();
   string i = "";

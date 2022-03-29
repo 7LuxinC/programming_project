@@ -47,6 +47,9 @@ private:
     void hasTakeBtn(QString qs);
     void collectItems();
 
+    void showItemsInBag();
+
+
 
 };
 #endif // MAINWINDOW_H

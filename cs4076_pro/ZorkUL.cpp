@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
 }
 
 ZorkUL::ZorkUL() {
+     character = new Character();
 	createRooms();
 }
 
@@ -79,6 +80,11 @@ void ZorkUL::createRooms()  {
 
 Room* ZorkUL::getCurrentRoom(){
     return currentRoom;
+}
+
+Character* ZorkUL::getCharacter(){
+
+    return character;
 }
 
 
