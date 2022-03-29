@@ -79,10 +79,10 @@ void Room::removeItemFromRoom(int index){
 
 string Room::displayItem() {
 
-    string tempString = "items in room = ";
+    string tempString = "Elements in Current Location :";
     int sizeItems = (itemsInRoom.size());
     if (itemsInRoom.size() < 1) {
-        tempString = "no items in room";
+        tempString = "**No elements in current Location**";
         }
     else if (itemsInRoom.size() > 0) {
        int x = (0);

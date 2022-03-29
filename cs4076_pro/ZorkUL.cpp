@@ -29,22 +29,22 @@ void ZorkUL::createRooms()  {
     Room *mainland, *farm, *mysWood, *river, *cave, *forest, *volcano, *sky, *cliff;
 
 
-    mainland = new Room("mainland", ":/resources/img/mainland.jpg");
-        mainland->addItem(new Item("x"));
-        mainland->addItem(new Item("y"));
+    mainland = new Room("Mainland", ":/resources/img/mainland.jpg");
 
+   farm = new Room("Farm",":/resources/img/farm.jpg");
+       farm->addItem(new Item("Fertile Soil"));
 
-   farm = new Room("farm",":/resources/img/farm.jpg");
-       farm->addItem(new Item("xx", 3, 33));
-       farm->addItem(new Item("yy", 4, 44));
+    mysWood = new Room("Mystweriou Wood",":/resources/img/mysterious_wood.jpg");
 
-    mysWood = new Room("mysWood",":/resources/img/mysterious_wood.jpg");
-
-    river = new Room("river",":/resources/img/riverside.jpg");
+    river = new Room("Riverside",":/resources/img/riverside.jpg");
+        river ->addItem(new Item("Spring Water"));
     cave = new Room("cave",":/resources/img/dark_cave.jpg");
-    forest = new Room("forest",":/resources/img/forest.jpg");
-    volcano = new Room("volcano",":/resources/img/volcano.jpg");
-    sky = new Room("sky",":/resources/img/sky_city.jpg");
+        cave ->addItem(new Item("Gold Ore"));
+    forest = new Room("Forest",":/resources/img/forest.jpg");
+        forest -> addItem(new Item("Wood Stick"));
+    volcano = new Room("Volcano",":/resources/img/volcano.jpg");
+        volcano ->addItem(new Item("Fire Gabbro"));
+    sky = new Room("Sky City",":/resources/img/sky_city.jpg");
     cliff = new Room("cliff",":/resources/img/cliff.jpg");
 
    //nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
