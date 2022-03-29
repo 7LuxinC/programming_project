@@ -5,6 +5,7 @@
 
 
 #include "ZorkUL.h"
+#include "wordledialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -38,9 +39,14 @@ private slots:
 
     void on_collectBtn_clicked();
 
+    void on_bag_clicked();
+
+    void on_activation_clicked();
+
 private:
     Ui::MainWindow *ui;
     ZorkUL *zork;
+    WordleDialog *wordleDialog;
    
     QString toQstr(string str);
 
@@ -48,6 +54,7 @@ private:
     void collectItems();
 
     void showItemsInBag();
+    void checkWordleQuizz();
 
 
 

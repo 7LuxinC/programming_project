@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "ZorkUL.h"
 
 #include<QMessageBox>
@@ -30,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
-        listItem();
-
+    listItem();
+    ui ->activation ->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -95,6 +96,8 @@ void MainWindow::on_northBtn_clicked()
 
     hasTakeBtn(s);
 
+   checkWordleQuizz();
+
 }
 
 
@@ -108,6 +111,8 @@ void MainWindow::on_eastBtn_clicked()
     ui -> imgLb -> setPixmap(pix1);
 
     hasTakeBtn(s);
+
+    checkWordleQuizz();
 
 
 
@@ -125,6 +130,7 @@ void MainWindow::on_west_clicked()
     ui -> imgLb -> setPixmap(pix1);
 
     hasTakeBtn(s);
+    checkWordleQuizz();
 
 }
 
@@ -143,6 +149,7 @@ void MainWindow::on_southBtn_clicked()
     ui -> imgLb -> setPixmap(pix1);
 
     hasTakeBtn(s);
+    checkWordleQuizz();
 
 }
 
@@ -160,6 +167,7 @@ void MainWindow::on_teleportBtn_clicked()
     ui -> imgLb -> setPixmap(pix1);
 
     hasTakeBtn(s);
+    checkWordleQuizz();
 
 
 }
@@ -233,5 +241,29 @@ void MainWindow::on_collectBtn_clicked()
 
 void MainWindow::showItemsInBag(){
      ui -> output -> append(toQstr(zork ->getCharacter() ->getLongDescription()));
+}
+
+
+void MainWindow::on_bag_clicked()
+{
+    showItemsInBag();
+}
+
+
+void MainWindow::checkWordleQuizz(){
+    if(zork ->getCurrentRoom()->shortDescription() == "Sky City"){
+        ui ->activation ->setEnabled(true);
+    }else {
+        ui ->activation ->setEnabled(false);
+    }
+}
+
+
+
+
+void MainWindow::on_activation_clicked()
+{
+    wordleDialog = new WordleDialog();
+    wordleDialog->exec();
 }
 

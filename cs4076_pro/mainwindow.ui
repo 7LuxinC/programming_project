@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="quitBtn">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>780</x>
       <y>0</y>
-      <width>91</width>
+      <width>51</width>
       <height>61</height>
      </rect>
     </property>
@@ -33,9 +33,9 @@
    <widget class="QPushButton" name="messageBtn">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>680</x>
       <y>0</y>
-      <width>101</width>
+      <width>91</width>
       <height>61</height>
      </rect>
     </property>
@@ -49,7 +49,7 @@
    <widget class="QPushButton" name="infoBtn">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>580</x>
       <y>0</y>
       <width>91</width>
       <height>61</height>
@@ -65,10 +65,10 @@
    <widget class="QLabel" name="imgLb">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>421</width>
-      <height>291</height>
+      <x>10</x>
+      <y>10</y>
+      <width>431</width>
+      <height>261</height>
      </rect>
     </property>
     <property name="text">
@@ -100,9 +100,9 @@
    <widget class="QPushButton" name="collectBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>120</x>
       <y>320</y>
-      <width>351</width>
+      <width>281</width>
       <height>29</height>
      </rect>
     </property>
@@ -116,9 +116,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>370</y>
-      <width>371</width>
+      <x>10</x>
+      <y>390</y>
+      <width>421</width>
       <height>191</height>
      </rect>
     </property>
@@ -303,7 +303,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>280</y>
+      <y>270</y>
       <width>371</width>
       <height>71</height>
      </rect>
@@ -312,14 +312,66 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>410</x>
       <y>320</y>
-      <width>81</width>
+      <width>61</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>====&gt;&gt;&gt;&gt;</string>
+     <string>==&gt;&gt;&gt;&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bag">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>0</y>
+      <width>91</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bag</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>move Counter</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>portion bar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="activation">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>350</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ACTIVATION</string>
     </property>
    </widget>
   </widget>
