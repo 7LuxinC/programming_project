@@ -10,5 +10,6 @@
         <file>img/riverside.jpg</file>
         <file>img/sky_city.jpg</file>
         <file>img/volcano.jpg</file>
+        <file>word_list.txt</file>
     </qresource>
 </RCC>

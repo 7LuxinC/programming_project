@@ -114,7 +114,7 @@
     <string>Letter in th correct word:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="pri">
    <property name="geometry">
     <rect>
      <x>440</x>

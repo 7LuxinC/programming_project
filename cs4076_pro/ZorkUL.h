@@ -17,8 +17,8 @@ static int const arrSize = 9;  // room array of pointer
 private:
 Character *character;
 	Parser parser;
-  Room *currentRoom;
-  Room *rooms[arrSize];
+    Room *currentRoom;
+    Room *rooms[arrSize];
 	void createRooms();
 
 	bool processCommand(Command command); 

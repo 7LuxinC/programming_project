@@ -39,6 +39,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete zork;
+
+
 }
 
 //change any string to Qstring
@@ -265,5 +267,6 @@ void MainWindow::on_activation_clicked()
 {
     wordleDialog = new WordleDialog();
     wordleDialog->exec();
+    delete wordleDialog;
 }
 
