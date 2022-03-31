@@ -1,55 +1,84 @@
+#include "wordle.h"
 #include "time.h"
 #include <stdlib.h>
-#include <string>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
 
 
+using namespace std;
+
+wordle::wordle(){
+
+}
 /** store word in the vector*/
-void wordle::listOfWords(string filename){
+void wordle::listOfWords(){
   string line;
 
-  ifstream file(filename);
+  QFile file(":/resources/word_list.txt");
 
-  if(file.is_open()){
-
-    while(getline(file,line)){
-      possibleWords.push_back(line);
-    }
+  if(!file.open(QFile::ReadOnly|QFile::Text)){
+    cout << "file is not open!!" << "\n";
   }
 
+  QTextStream in(&file);
+
+  while(!in.atEnd()){
+      QString line = in.readLine();
+
+      string l = line.toStdString();
+      possibleWords.push_back(l);
+  }
+
+
   file.close();
+
+
 }
 
 /** set a guess-word for player to guess*/
-  void Wordle::setGuessWord(){
-    int size,i;
+  void wordle::setGuessWord(){
+    int size;
     srand(time(0));
 
-    size = 1;
-    i = rand() % size;
-    guessWord = possibleWords.at(i);
+    size = possibleWords.size();
+    int in = rand() % size;
+    guessWord = possibleWords.at(in);
   }
 
 /** get the guess word */
-  string getGuessWord(){
+  string wordle::getGuessWord(){
     return guessWord;
   }
 
+  string wordle::setAttemptWord(string word){
+      this->attemptWord = word;
+      return attemptWord;
+  }
 
-bool validWord(string word){
+
+  string wordle::getAttemptWord(){
+
+
+      return attemptWord;
+  }
+
+
+bool wordle::validWord(string word){
   if(word.length() != 5){
     return false;
   }
 word  = toLower(word);
 
   for(int i = 0; i < MAX; i++){
-    if(possibleWords.at(i) == word){
+    if(possibleWords.at(i) == word){  //check the word you typed if it existed in the wordfile list
       return true;
     }
   }
   return false;
 }
 
-string toLower(string word){
+string wordle::toLower(string word){
   int n = word.length();
 
   for(int i = 0; i < n; i++){
@@ -59,50 +88,56 @@ string toLower(string word){
 }
 
 
-bool winGame(string word){
+bool wordle::winGame(string word){
 
   word = toLower(word);
 
   if(word == guessWord){
      return true;
    }
-
   return false;
 
   }
 
-string setGame(){
-  listOfWords("words.txt");
-  setGuessWord();
+string wordle::setGame(){
+ listOfWords();
+ setGuessWord();
 
   string welcome = "Welcome to wordle world challenge! What will be the magic word of the day????" ;
 
   return welcome;
   }
 
-void checkWord(string word){
-  bool correctP = false, wrongP = false;
+
+void wordle::checkWord(string word){
+
+   setAttemptWord(word);
 
   for(int i = 0; i < 5; i++){
-    if(guessWords[i] == word[i]){
-      correctP = true;
-      attemptWord[i] = "g";   //g = green color
+      bool wrongPlace = false;
+      bool rightPlace = false;
+    if(guessWord[i] == word[i]){    //correct letter in right place
+
+      attemptWord[i] = 'g';   //g = green color
+      rightPlace = true;
+
     }else{
 
       for(int in = 0; in < 5; in++){
-        if(word[i] == guessWord[in]){
-          wrongP = true;
-          attemptWord[in] = "y";    //y = yellow color
+        if(word[i] == guessWord[in]){   //correct letter in wrong place
+
+            wrongPlace = true;//y = yellow color
         }
       }
 
+      if(wrongPlace == true){
+        attemptWord[i]= 'y';
+      }
     }
-
-    if(rightP = false && wrongP == false){
-      attemptWord[i] = "x";    //x = no color
+if(wrongPlace == false && rightPlace == false){
+      attemptWord[i] = 'x';    //x = no color    // irrelevant letter
     }
+ }
 
-  }
 
 }
-
