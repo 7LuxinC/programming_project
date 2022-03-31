@@ -55,6 +55,7 @@ private:
 
     void showItemsInBag();
     void checkWordleQuizz();
+    void counter();
 
 
 

@@ -10,18 +10,19 @@ using std::vector;
 
 class Character {
 private:
-	string description;
+    int move;
+    int potion;
+     string description;
      vector <string> itemsInCharacter;
 public:
     void addItems(string description);
-
-
-
-
-public:
-    Character();
+    Character(int move = 0, int potion = 0);    //default parameter in constructor
     string getShortDescription();
     string getLongDescription();
+     void getMoving();
+   string getMove();
+    int getPotion();
+    void moveCounter(string noLoc);
 
 };
 

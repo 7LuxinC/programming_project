@@ -8,6 +8,7 @@
 #include <QString>
 #include <QtDebug>
 #include <QPixmap>
+#include <cstring>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
     zork = new ZorkUL();
     QString qstr = QString::fromStdString(zork ->printWelcome());
     ui ->output -> setText(qstr);
+
+
+    ui->moveLb ->setText("MOVE: " + toQstr(zork->getCharacter()->getMove()));
 
 
     QPixmap pix1(toQstr(zork ->getPic()));
@@ -84,11 +88,27 @@ void MainWindow::on_quitBtn_clicked()
 }
 
 
+void MainWindow::counter(){
+
+    string stay = ui->output->toPlainText().toStdString();
+    zork ->getCharacter() ->moveCounter(stay);
+    string move = zork ->getCharacter() ->getMove();
+
+    ui->moveLb ->setText("MOVE: " + toQstr(move));
+
+    string p = to_string(zork ->getCharacter() ->getPotion());
+
+     ui->potionBar ->setText("POTION: " + toQstr(p));
+}
+
+
+
 
 
 
 void MainWindow::on_northBtn_clicked()
 {
+
     QString s = toQstr( zork ->go("north"));
 
     ui -> output ->setText(s);
@@ -96,9 +116,11 @@ void MainWindow::on_northBtn_clicked()
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
+    counter();
     hasTakeBtn(s);
 
    checkWordleQuizz();
+
 
 }
 
@@ -112,6 +134,7 @@ void MainWindow::on_eastBtn_clicked()
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
+    counter();
     hasTakeBtn(s);
 
     checkWordleQuizz();
@@ -131,6 +154,7 @@ void MainWindow::on_west_clicked()
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
+    counter();
     hasTakeBtn(s);
     checkWordleQuizz();
 
@@ -149,7 +173,7 @@ void MainWindow::on_southBtn_clicked()
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
-
+    counter();
     hasTakeBtn(s);
     checkWordleQuizz();
 
@@ -167,7 +191,7 @@ void MainWindow::on_teleportBtn_clicked()
 
     QPixmap pix1(toQstr(zork ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
-
+    counter();
     hasTakeBtn(s);
     checkWordleQuizz();
 

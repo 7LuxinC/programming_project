@@ -335,7 +335,7 @@
      <string>Bag</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="moveLb">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -348,7 +348,7 @@
      <string>move Counter</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="potionBar">
     <property name="geometry">
      <rect>
       <x>10</x>
