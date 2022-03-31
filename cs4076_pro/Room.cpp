@@ -8,7 +8,7 @@
 Room::Room(string description,string imgPath) {
 	this->description = description;
     this ->imgPath = imgPath;
-    //rmImgs.push_back(this -> imgPath);
+
 }
 
 string Room::getImg(){
@@ -62,6 +62,19 @@ void Room::addItem(Item *inItem) {
     //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
 }
+
+string Room::getItemImage(string itemname){
+
+
+    for(int i = 0; i < getItemSize(); i++){
+        if(itemsInRoom.at(i).getShortDescription() == itemname){
+             return itemsInRoom.at(i).getImagePath();
+        }
+    }
+    return "null";
+}
+
+
 
 void Room::removeItemFromRoom(int index){
     int i = 0;

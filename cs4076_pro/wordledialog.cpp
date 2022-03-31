@@ -7,11 +7,11 @@
 using namespace std;
 
 
-#define ANSI_GREEN "\x1b[32m"
-#define ANSI_YELLOW "\x1b[33m"
-
 
 int counter = 0;
+
+
+
 
 WordleDialog::WordleDialog(QWidget *parent) :
     QDialog(parent),

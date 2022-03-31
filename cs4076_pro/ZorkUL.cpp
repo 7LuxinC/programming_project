@@ -30,22 +30,33 @@ void ZorkUL::createRooms()  {
 
 
     mainland = new Room("Mainland", ":/resources/img/mainland.jpg");
+            mainland->addItem(new Item("Magic Potion", ":/resources/img/magic_potion.png"));
 
    farm = new Room("Farm",":/resources/img/farm.jpg");
-       farm->addItem(new Item("Fertile Soil"));
+       farm->addItem(new Item("Fertile Soil",":/resources/img/earth.png"));
 
     mysWood = new Room("Mystweriou Wood",":/resources/img/mysterious_wood.jpg");
+       mysWood ->addItem(new Item("Magic Potion",":/resources/img/magic_potion.png"));
 
     river = new Room("Riverside",":/resources/img/riverside.jpg");
-        river ->addItem(new Item("Spring Water"));
+        river ->addItem(new Item("Spring Water",":/resources/img/water.png"));
+
     cave = new Room("cave",":/resources/img/dark_cave.jpg");
-        cave ->addItem(new Item("Gold Ore"));
+        cave ->addItem(new Item("Gold Ore",":/resources/img/gold.png"));
+        cave ->addItem(new Item("Magic Potion",":/resources/img/magic_potion.png"));
+        cave ->addItem(new Item("Magic Potion",":/resources/img/magic_potion.png"));
+
     forest = new Room("Forest",":/resources/img/forest.jpg");
-        forest -> addItem(new Item("Wood Stick"));
+        forest -> addItem(new Item("Wood Stick",":/resources/img/wood.png"));
+
     volcano = new Room("Volcano",":/resources/img/volcano.jpg");
-        volcano ->addItem(new Item("Fire Gabbro"));
+        volcano ->addItem(new Item("Fire Gabbro",":/resources/img/fire.png"));
+        volcano ->addItem(new Item("Magic Potion",":/resources/img/magic_potion.png"));
+
     sky = new Room("Sky City",":/resources/img/sky_city.jpg");
+
     cliff = new Room("cliff",":/resources/img/cliff.jpg");
+
 
    //nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
 

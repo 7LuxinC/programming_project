@@ -1,17 +1,22 @@
 #include "item.h"
 
-Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/) {
-	description = inDescription;
-	setWeight(inWeightGrams);
-	value = inValue;
-	/**weaponCheck(isWeapon);*/
-}
-
 Item::Item(string inDescription) {
-	description = inDescription;
+    description = inDescription;
 }
 
+Item::Item (string inDescription,string imgPath) {
+	description = inDescription;
+    imagePath = imgPath;
 
+
+}
+
+string Item::getImagePath(){
+
+    return imagePath;
+
+}
+/*
 
 void Item::setWeight(int inWeightGrams)
 {
@@ -28,6 +33,7 @@ void Item::setValue(float inValue)
     else
 	   value = inValue;
 }
+*/
 
 /**void Item::setWeaponCheck(int isWeapon)
 {

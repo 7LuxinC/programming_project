@@ -42,6 +42,7 @@ public:
    int getItemSize();
 
    string searchItem(int index);
+   string getItemImage(string itemname);
 };
 
 #endif

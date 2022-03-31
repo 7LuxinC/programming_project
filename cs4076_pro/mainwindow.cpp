@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     listItem();
     ui ->activation ->setEnabled(false);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -233,15 +235,20 @@ void MainWindow::listItem(){
 
 void MainWindow::collectItems(){
 
-    int rowOfItems = ui -> listWidget -> currentRow();
+    int rowOfItems = ui -> listWidget ->currentRow();
 
     QListWidgetItem *it = ui ->listWidget->takeItem(rowOfItems);  //get the selected item in list
 
 
     string foundItem = zork ->getCurrentRoom()->searchItem(rowOfItems);       //search matching item in room
-
+ showElement(foundItem);
 
     zork ->getCharacter()->addItems(foundItem);      //add item in player's bag
+
+
+
+
+
     zork ->getCurrentRoom() ->removeItemFromRoom(rowOfItems);   //remove the item in room
 
     //details:
@@ -257,6 +264,25 @@ void MainWindow::collectItems(){
 
 }
 
+
+void MainWindow::showElement(string itemN){
+    string imgP = zork->getCurrentRoom()->getItemImage(itemN);
+
+    if(itemN == "Magic Potion"){
+        ui->element1 ->setText(toQstr(itemN));
+         ui -> element1 -> setPixmap(toQstr(imgP));
+    }else if(itemN == "Fertile Soil"){
+        ui -> element2 -> setPixmap(toQstr(imgP));
+    }else if(itemN == "Spring Water"){
+        ui -> element3 -> setPixmap(toQstr(imgP));
+    }else if(itemN == "Gold Ore"){
+        ui -> element4 -> setPixmap(toQstr(imgP));
+    }else if(itemN == "Fire Gabbro"){
+         ui -> element5 -> setPixmap(toQstr(imgP));
+    }else if(itemN == "Wood Stick"){
+        ui -> element6 -> setPixmap(toQstr(imgP));
+    }
+}
 
 
 

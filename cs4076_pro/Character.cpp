@@ -35,6 +35,8 @@ void Character::addItems(string description) {
 
 }
 
+
+
 string Character::getShortDescription(){
     return this -> description;
 }

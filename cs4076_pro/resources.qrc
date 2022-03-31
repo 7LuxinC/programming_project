@@ -11,5 +11,11 @@
         <file>img/sky_city.jpg</file>
         <file>img/volcano.jpg</file>
         <file>word_list.txt</file>
+        <file>img/fire.png</file>
+        <file>img/gold.png</file>
+        <file>img/water.png</file>
+        <file>img/wood.png</file>
+        <file>img/magic_potion.png</file>
+        <file>img/earth.png</file>
     </qresource>
 </RCC>
