@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define MAX 2000
+#define MAX 1000
 
 class wordle{
 

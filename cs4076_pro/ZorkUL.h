@@ -29,6 +29,7 @@ Character *character;
 
 public:
 	ZorkUL();
+    ~ZorkUL();
 	void play();
     string go(string direction);
     string printHelp();

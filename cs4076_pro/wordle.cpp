@@ -42,8 +42,8 @@ void wordle::listOfWords(){
     srand(time(0));
 
     size = possibleWords.size();
-    int in = rand() % size;
-    guessWord = possibleWords.at(in);
+    int in = rand() % size ;
+    guessWord = possibleWords.at(in );
   }
 
 /** get the guess word */

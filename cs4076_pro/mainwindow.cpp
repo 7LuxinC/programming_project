@@ -9,17 +9,24 @@
 #include <QtDebug>
 #include <QPixmap>
 #include <cstring>
+#include <QColor>
 
+int m= 1;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+    //QString title = QString("<span style=\" color:#ff0000;\"> ELEMENTS: </span>").arg(">>>");
+
+     ui ->groupBox ->setStyleSheet("QGroupBox {color: lightblue; font:bold}");
+     ui->potionBar->setStyleSheet("QLabel {color: white; font:bold}");
+     ui->moveLb ->setStyleSheet("QLabel {color:white; font:bold}");
+
     //upload map picture in the mainwindow screen
     QPixmap pix(":/resources/img/map.png");
     ui -> mapImg -> setPixmap(pix);   //mapImg = label
-
 
 
 
@@ -37,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     listItem();
     ui ->activation ->setEnabled(false);
+
 
 
 }
@@ -100,7 +108,8 @@ void MainWindow::counter(){
 
     string p = to_string(zork ->getCharacter() ->getPotion());
 
-     ui->potionBar ->setText("POTION: " + toQstr(p));
+
+     ui->potionBar ->setText("MAGIC POTION: " + toQstr(p));
 }
 
 
@@ -243,7 +252,7 @@ void MainWindow::collectItems(){
     string foundItem = zork ->getCurrentRoom()->searchItem(rowOfItems);       //search matching item in room
  showElement(foundItem);
 
-    zork ->getCharacter()->addItems(foundItem);      //add item in player's bag
+    zork ->getCharacter()->addItems(foundItem,*zork ->getCurrentRoom());      //add item in player's bag
 
 
 
@@ -289,6 +298,8 @@ void MainWindow::showElement(string itemN){
 void MainWindow::on_collectBtn_clicked()
 {
     collectItems();
+
+
 }
 
 void MainWindow::showItemsInBag(){
@@ -316,7 +327,10 @@ void MainWindow::checkWordleQuizz(){
 void MainWindow::on_activation_clicked()
 {
     wordleDialog = new WordleDialog();
+
     wordleDialog->exec();
     delete wordleDialog;
 }
+
+
 

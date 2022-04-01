@@ -65,21 +65,26 @@ void WordleDialog::on_lineEdit_returnPressed()
         wordWithColor(word);
 
         counter++;
+
+        if(wordleGame->validWord(word)== true && counter == max){
+            counter--;
+            ui ->lineEdit->setEnabled(false);
+        }
     }
 
 
 
-    ui->lineEdit ->clear();
+
 
         //counter for number of trial
 
      if(counter == max){
          ui ->lineEdit->setEnabled(false);
          QString correctWord = QString::fromStdString(wordleGame->getGuessWord());
-         QMessageBox::information(this," Challenge Ended ", "Challenge is ended,you cannot fill up or activate the magic potion. \n The magic word is " + correctWord + "!!!! \n >>>> Try next time. <<<<");
+         QMessageBox::information(this," Challenge Ended ", "Challenge is ended,you cannot fill up or activate the magic potion. \n The magic word is  \n\t !!  " + correctWord + "  !! \n >>>> Try next time. <<<<");
 
      }
-
+ ui->lineEdit ->clear();
 
 }
 
@@ -91,7 +96,7 @@ void WordleDialog::wordWithColor(string word){
 
 
  for(int i = 0; i < 5; i++){
-    ui->pri ->appendPlainText("hjk");
+
         if(colorWord[i] == 'g'){
 
 
@@ -103,7 +108,7 @@ void WordleDialog::wordWithColor(string word){
 
         }else if(colorWord[i] == 'y'){
 
-            ui -> typedWords -> setTextColor(Qt::darkYellow);
+            ui -> typedWords -> setTextColor(Qt::yellow);
             QString str = QString(word[i]);   //change char to qstring
             ui ->typedWords -> insertPlainText(str);
             ui->typedWords ->moveCursor(QTextCursor::End);
@@ -129,7 +134,7 @@ void WordleDialog::wordWithColor(string word){
 
 void WordleDialog::on_pushButton_clicked()
 {
-    QString qstr = QString::fromStdString("Wordle is simple: You have six chances to guess the day's secret five-letter word. Type in a word as a guess, and the game tells you which letters are or aren't in the word. The aim is to figure out the secret word with the fewest guesses."
+    QString qstr = QString::fromStdString("Wordle is simple: You have six chances to guess the day's secret five-letter word. Type in a word as a guess, and the game tells you which letters are or aren't in the word.\n\nBlue Color: A letter which is not in the guess word.\nYellow Color: A letter which is in the word somewhere. \n Green Color: Letter is in the guess word and also in the right position.\n\nThe aim is to figure out the secret word with the fewest guesses."
                                           "If player won the game, the magic potion get activate or fill up. If you lost, you cannot use potion to activate the power of 5-colours sprite stone");
     QMessageBox::information(this," Wordle ", qstr);
 
