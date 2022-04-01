@@ -5,14 +5,16 @@
 #include <string>
 #include <vector>
 
-
 #include "item.h"
 
 
 using namespace std;
 using std::vector;
 
+
 class Room {
+
+    friend class Character;
 
 private:
 	string description;

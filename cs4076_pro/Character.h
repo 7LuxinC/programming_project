@@ -6,23 +6,27 @@
 using namespace std;
 #include <vector>
 using std::vector;
+#include "Room.h"
 
 
 class Character {
 private:
     int move;
-    int potion;
+
      string description;
-     vector <string> itemsInCharacter;
+
+     vector<Item> itemInBag;
 public:
-    void addItems(string description);
-    Character(int move = 0, int potion = 0);    //default parameter in constructor
+    void addItems(string description,Room& room);
+    Character(int move = 0);    //default parameter in constructor
     string getShortDescription();
     string getLongDescription();
      void getMoving();
    string getMove();
     int getPotion();
     void moveCounter(string noLoc);
+    Item operator+(Item& item1);
+    int getNumItemInBag();
 
 };
 
