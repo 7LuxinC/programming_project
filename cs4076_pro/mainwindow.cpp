@@ -304,7 +304,8 @@ void MainWindow::on_collectBtn_clicked()
 
     //set progress bar
     int value = zork->getCharacter()->getPotion();
-    ui->progressBar ->setValue(value * 10);
+    value = value * 10;
+    ui->progressBar ->setValue(value);
 
 }
 
@@ -321,11 +322,17 @@ void MainWindow::on_bag_clicked()
 
 
 void MainWindow::checkWordleQuizz(){
+
     if(zork ->getCurrentRoom()->shortDescription() == "Sky City"){
+        if(zork->getCharacter()->getNumItemInBag() != 0){
+
         ui ->activation ->setEnabled(true);
+        }
     }else {
         ui ->activation ->setEnabled(false);
     }
+
+
 }
 
 
@@ -335,8 +342,32 @@ void MainWindow::on_activation_clicked()
 {
     wordleDialog = new WordleDialog();
 
-    wordleDialog->exec();
+  wordleDialog->exec();
+
+    if(wordleDialog ->winGame()){
+         connect(ui->activation,SIGNAL(click(bool)),ui->progressBar,SLOT(reset(bool)));
+        ui->progressBar ->setValue(100);
+        zork->getCharacter()->setPotion(10);
+
+        wonGame();
+
+    }
+
     delete wordleDialog;
+
+
+    wonGame();
+
+}
+
+void MainWindow::wonGame(){
+   int progressValue = ui->progressBar ->value();
+   int bagItems = zork->getCharacter()->getNumItemInBag();
+
+   if(progressValue == 100 && bagItems == 6){
+       QMessageBox::information(this,"!!!!  GREAT JOB  !!!!", "Hoooray!!, you save the land of the Loswilire and you are the master of power guardiance of this land.\n\n ******  MISSION FINISHED  ******");
+
+   }
 }
 
 

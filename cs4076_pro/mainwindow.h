@@ -61,6 +61,7 @@ private:
     void counter();
     void showElement(string itemN);
     void potionChange(int value);
+   void wonGame();
 
 
 

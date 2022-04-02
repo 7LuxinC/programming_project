@@ -32,8 +32,12 @@ WordleDialog::~WordleDialog()
     delete wordleGame;
 }
 
-
-
+bool WordleDialog::winGame(){
+    if(wonOrLost == true){
+        return true;
+    }
+    return false;
+}
 
 
 void WordleDialog::on_lineEdit_returnPressed()
@@ -45,7 +49,9 @@ void WordleDialog::on_lineEdit_returnPressed()
 
     ui -> opText ->append("You Entered -->  " + textInLine );
 
-    if(wordleGame -> winGame(word) == true ){
+    if(wordleGame->winGame(word)==true){
+        wonOrLost = true;
+
        QString congrat = QString::fromStdString("Congratulations!!! You win! You guess the magic word!! You can activate your magic potion for your spirit stone! Go back to the castle in the mainLand to transfer the power to the spirit stone! Good Luck!!!");
         QMessageBox::information(this,"****CONGRATULATION****", congrat);
    }
@@ -59,14 +65,12 @@ void WordleDialog::on_lineEdit_returnPressed()
 
 
     if(wordleGame->validWord(word)== true){
+       wordleGame ->checkWord(word);
+       wordWithColor(word);
 
+      counter++;
 
-      wordleGame ->checkWord(word);
-        wordWithColor(word);
-
-        counter++;
-
-        if(wordleGame->validWord(word)== true && counter == max){
+        if(wordleGame->winGame(word)== true && counter == max){
             counter--;
             ui ->lineEdit->setEnabled(false);
         }
@@ -74,11 +78,10 @@ void WordleDialog::on_lineEdit_returnPressed()
 
 
 
-
-
         //counter for number of trial
 
      if(counter == max){
+         wonOrLost = false;
          ui ->lineEdit->setEnabled(false);
          QString correctWord = QString::fromStdString(wordleGame->getGuessWord());
          QMessageBox::information(this," Challenge Ended ", "Challenge is ended,you cannot fill up or activate the magic potion. \n The magic word is  \n\t !!  " + correctWord + "  !! \n >>>> Try next time. <<<<");

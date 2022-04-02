@@ -28,6 +28,7 @@ public:
     void moveCounter(string noLoc);
     Item operator+(Item& item1);
     int getNumItemInBag();
+    int setPotion(int value);
 
 };
 

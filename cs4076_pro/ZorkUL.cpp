@@ -149,7 +149,7 @@ string ZorkUL::getPic(){
  * returned.
  */
 bool ZorkUL::processCommand(Command command) {
-	if (command.isUnknown()) {
+    if (command.isUnknown()) {
 		cout << "invalid input"<< endl;
 		return false;
 	}
@@ -169,11 +169,8 @@ bool ZorkUL::processCommand(Command command) {
         cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
 
 
-        //cout << "         |         " << endl;            //-add nr in the map
-        //cout << "         |         " << endl;            //^
-        //cout << "        [nr]       " << endl;            //^
 
-		}
+        }
 
 	else if (commandWord.compare("go") == 0)
 		goRoom(command);
@@ -217,12 +214,12 @@ bool ZorkUL::processCommand(Command command) {
     }
 */
     else if (commandWord.compare("quit") == 0) {
-		if (command.hasSecondWord())
-			cout << "overdefined input"<< endl;
-		else
-			return true; /**signal to quit*/
-	}
-	return false;
+        if (command.hasSecondWord())
+            cout << "overdefined input"<< endl;
+        else
+            return true; /**signal to quit*/
+    }
+    return false;
 }
 /** COMMANDS **/
 

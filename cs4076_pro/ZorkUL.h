@@ -21,7 +21,7 @@ Character *character;
     Room *rooms[arrSize];
 	void createRooms();
 
-	bool processCommand(Command command); 
+    bool processCommand(Command command);
 
 
     void createItems();

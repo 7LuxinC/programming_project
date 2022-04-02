@@ -38,6 +38,23 @@ int Character::getPotion(){
         return potion;
 }
 
+
+int Character::setPotion(int value){
+    vector<Item>::iterator it;
+    for(it = itemInBag.begin(); it != itemInBag.end(); it++){
+        if(it->getShortDescription() == "Magic Potion"){
+            potion  = value;
+
+            return potion;
+
+        }
+    }
+        return potion;
+
+}
+
+
+
 int Character::getNumItemInBag(){
     return itemInBag.size();
 }
