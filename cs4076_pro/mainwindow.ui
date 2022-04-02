@@ -392,7 +392,7 @@
      <string>MOVE</string>
     </property>
    </widget>
-   <widget class="QLabel" name="potionBar">
+   <widget class="QLabel" name="potionLb">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -441,6 +441,9 @@
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="textVisible">
      <bool>true</bool>
@@ -694,18 +697,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>progressBar</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>collectBtn</receiver>
-   <slot>click()</slot>
+   <sender>collectBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar</receiver>
+   <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>123</x>
-     <y>394</y>
+     <x>127</x>
+     <y>354</y>
     </hint>
     <hint type="destinationlabel">
-     <x>145</x>
-     <y>344</y>
+     <x>134</x>
+     <y>378</y>
     </hint>
    </hints>
   </connection>

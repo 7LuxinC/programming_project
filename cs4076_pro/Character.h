@@ -16,6 +16,7 @@ private:
      string description;
 
      vector<Item> itemInBag;
+     int potion;
 public:
     void addItems(string description,Room& room);
     Character(int move = 0);    //default parameter in constructor

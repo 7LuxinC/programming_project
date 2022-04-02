@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <cstring>
 #include <QColor>
+#include <QProgressBar>
 
 int m= 1;
 MainWindow::MainWindow(QWidget *parent)
@@ -18,11 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //QString title = QString("<span style=\" color:#ff0000;\"> ELEMENTS: </span>").arg(">>>");
 
      ui ->groupBox ->setStyleSheet("QGroupBox {color: lightblue; font:bold}");
-     ui->potionBar->setStyleSheet("QLabel {color: white; font:bold}");
+      ui->potionLb->setStyleSheet("QLabel {color: white; font:bold}");
      ui->moveLb ->setStyleSheet("QLabel {color:white; font:bold}");
+     ui->progressBar->setStyleSheet("QProgressBar::chunk{background-color: lightgreen;} QProgressBar {color: blue; font:bold}");
 
     //upload map picture in the mainwindow screen
     QPixmap pix(":/resources/img/map.png");
@@ -45,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     listItem();
     ui ->activation ->setEnabled(false);
 
+     ui->potionLb ->setText("MAGIC POTION:");
 
 
 }
@@ -106,10 +108,7 @@ void MainWindow::counter(){
 
     ui->moveLb ->setText("MOVE: " + toQstr(move));
 
-    string p = to_string(zork ->getCharacter() ->getPotion());
 
-
-     ui->potionBar ->setText("MAGIC POTION: " + toQstr(p));
 }
 
 
@@ -262,6 +261,7 @@ void MainWindow::collectItems(){
 
     //details:
     string currItemDetail = zork -> getCurrentRoom() ->longDescription();
+    ui->output->append("----------------------------------------");
     ui ->output -> append(toQstr("\n" + currItemDetail));
     showItemsInBag();
 
@@ -269,9 +269,9 @@ void MainWindow::collectItems(){
     delete it;    //it won't delete the object itself
 
 
-
-
 }
+
+
 
 
 void MainWindow::showElement(string itemN){
@@ -297,8 +297,14 @@ void MainWindow::showElement(string itemN){
 
 void MainWindow::on_collectBtn_clicked()
 {
+
     collectItems();
 
+
+
+    //set progress bar
+    int value = zork->getCharacter()->getPotion();
+    ui->progressBar ->setValue(value * 10);
 
 }
 
@@ -306,10 +312,11 @@ void MainWindow::showItemsInBag(){
      ui -> output -> append(toQstr(zork ->getCharacter() ->getLongDescription()));
 }
 
-
 void MainWindow::on_bag_clicked()
+
 {
     showItemsInBag();
+
 }
 
 
@@ -331,6 +338,7 @@ void MainWindow::on_activation_clicked()
     wordleDialog->exec();
     delete wordleDialog;
 }
+
 
 
 

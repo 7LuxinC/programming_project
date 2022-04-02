@@ -3,7 +3,7 @@
 
 
 Character::Character(int move):move(move){  //initialise list
-
+        potion = 0;
 }
 
  string Character::getMove(){
@@ -24,16 +24,18 @@ inline void Character::getMoving(){
 
 
 int Character::getPotion(){
-    int potion = 0;
+
 
     vector<Item>::iterator it;
     for(it = itemInBag.begin(); it != itemInBag.end(); it++){
-        if(it->getShortDescription() == "Magic potion)"){
-            potion = it ->getPotion();
+        if(it->getShortDescription() == "Magic Potion"){
+            potion = it->getPotion();
+
+            return potion;
+
         }
     }
-
-    return potion;
+        return potion;
 }
 
 int Character::getNumItemInBag(){
@@ -79,7 +81,7 @@ string Character::getShortDescription(){
 string Character::getLongDescription()
 {
   string ret = this->description;
-  ret += "\n *** Item in your Bag ***\n";
+  ret += "\n ****** Item in your Bag ******\n";
 
 
 
@@ -87,7 +89,7 @@ string Character::getLongDescription()
   for (int i = 0; i < getNumItemInBag(); i++){
 
       if(itemInBag.at(i).getShortDescription() == "Magic Potion"){
-          ret += "\t"+ itemInBag.at(i).getShortDescription() + to_string( itemInBag.at(i).getPotion()) + "\n";
+          ret += "\t"+ itemInBag.at(i).getShortDescription() + " x"+ to_string( itemInBag.at(i).getPotion()) + "\n";
       }else{
 
     ret += "\t"+ itemInBag.at(i).getShortDescription()  + "\n";

@@ -44,6 +44,8 @@ private slots:
     void on_activation_clicked();
 
 
+
+
 private:
     Ui::MainWindow *ui;
     ZorkUL *zork;
@@ -58,6 +60,7 @@ private:
     void checkWordleQuizz();
     void counter();
     void showElement(string itemN);
+    void potionChange(int value);
 
 
 
