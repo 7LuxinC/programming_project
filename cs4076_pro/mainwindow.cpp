@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui ->output -> setText(qstr);
 
 
-    ui->moveLb ->setText("MOVE: " + toQstr(zork->getCharacter()->getMove()));
+    ui->moveLb ->setText("MOVE: " + toQstr(to_string(zork->getCharacter()->getMove())));
 
 
     QPixmap pix1(toQstr(zork ->getPic()));
@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     listItem();
     ui ->activation ->setEnabled(false);
 
-     ui->potionLb ->setText("MAGIC POTION:");
+     ui->potionLb ->setText("MAGICAL POTION:");
 
 
 }
@@ -94,6 +94,7 @@ void MainWindow::on_quitBtn_clicked()
 
     if(reply == QMessageBox::Yes) {
         QApplication::quit();
+
     }else {
         qDebug() << "Stay in the program";
     }
@@ -104,7 +105,7 @@ void MainWindow::counter(){
 
     string stay = ui->output->toPlainText().toStdString();
     zork ->getCharacter() ->moveCounter(stay);
-    string move = zork ->getCharacter() ->getMove();
+    string move = to_string(zork ->getCharacter() ->getMove());
 
     ui->moveLb ->setText("MOVE: " + toQstr(move));
 
@@ -131,6 +132,7 @@ void MainWindow::on_northBtn_clicked()
 
    checkWordleQuizz();
 
+   randChoice(ui->northBtn,s);
 
 }
 
@@ -148,6 +150,7 @@ void MainWindow::on_eastBtn_clicked()
     hasTakeBtn(s);
 
     checkWordleQuizz();
+    randChoice(ui->eastBtn,s);
 
 
 
@@ -167,7 +170,7 @@ void MainWindow::on_west_clicked()
     counter();
     hasTakeBtn(s);
     checkWordleQuizz();
-
+randChoice(ui->west,s);
 }
 
 
@@ -187,6 +190,8 @@ void MainWindow::on_southBtn_clicked()
     hasTakeBtn(s);
     checkWordleQuizz();
 
+     randChoice(ui->southBtn,s);
+
 }
 
 
@@ -204,6 +209,8 @@ void MainWindow::on_teleportBtn_clicked()
     counter();
     hasTakeBtn(s);
     checkWordleQuizz();
+
+    randChoice(ui->teleportBtn,toQstr("no end output"));
 
 
 }
@@ -277,9 +284,14 @@ void MainWindow::collectItems(){
 void MainWindow::showElement(string itemN){
     string imgP = zork->getCurrentRoom()->getItemImage(itemN);
 
-    if(itemN == "Magic Potion"){
-        ui->element1 ->setText(toQstr(itemN));
+    if(itemN == "Magical Potion"){
+
+       // ui->element1 ->setText(toQstr(itemN));
          ui -> element1 -> setPixmap(toQstr(imgP));
+
+         if(zork ->getCharacter()->getPotion() == 0){
+             ui->element1 ->clear();
+         }
     }else if(itemN == "Fertile Soil"){
         ui -> element2 -> setPixmap(toQstr(imgP));
     }else if(itemN == "Spring Water"){
@@ -300,12 +312,8 @@ void MainWindow::on_collectBtn_clicked()
 
     collectItems();
 
-
-
-    //set progress bar
     int value = zork->getCharacter()->getPotion();
-    value = value * 10;
-    ui->progressBar ->setValue(value);
+    setProgressValue(ui->collectBtn,value);
 
 }
 
@@ -340,35 +348,112 @@ void MainWindow::checkWordleQuizz(){
 
 void MainWindow::on_activation_clicked()
 {
+
+    if(wonGame() == false){
+
     wordleDialog = new WordleDialog();
 
-  wordleDialog->exec();
+    wordleDialog->exec();
 
     if(wordleDialog ->winGame()){
-         connect(ui->activation,SIGNAL(click(bool)),ui->progressBar,SLOT(reset(bool)));
-        ui->progressBar ->setValue(100);
+         setProgressValue(ui->activation,10);
         zork->getCharacter()->setPotion(10);
-
-        wonGame();
-
     }
 
     delete wordleDialog;
 
+    }
 
-    wonGame();
+
 
 }
 
-void MainWindow::wonGame(){
+
+void MainWindow::setProgressValue(QPushButton *button,int value){
+
+    if(ui->progressBar->value() != 100){
+    connect(button,SIGNAL(click(bool)),ui->progressBar,SLOT(reset(bool)));
+    if(value > 10){
+        ui->progressBar->setValue(100);
+    }
+   ui->progressBar ->setValue(value * 10);
+}
+}
+
+void MainWindow::randChoice(QPushButton *button,QString directionOut){
+    int step = zork->getCharacter()->getMove();
+    string roomName = zork -> getCurrentRoom()->shortDescription();
+
+    if(zork->getCharacter()->getPotion() != 0 && ui->progressBar ->value() != 100){
+        if(step % 3 == 0 && roomName == "Mysterious Wood" ){
+            if(ui->progressBar ->value() > 10){
+            zork->getCharacter() ->takePotion(1);
+            int potionValue = zork ->getCharacter()->getPotion();
+            setProgressValue(button,potionValue);
+
+            ui->imgLb ->setPixmap(toQstr(":/resources/img/troll_attack.png"));
+
+            if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+
+              QMessageBox::information(this, "ALERT!!", "Troll is trying to take all your potion in Mysterious Wood. \n(Magical Potion -1)");
+            }
+           }
+
+        }else if(step % 4 == 0 && roomName == "Mysterious Wood"){
+            zork->getCharacter() ->addPotion(2);
+
+            int potionValue = zork ->getCharacter()->getPotion();
+            setProgressValue(button,potionValue);
+
+            ui->imgLb ->setPixmap(toQstr(":/resources/img/Mystery_Witch.png"));
+
+             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+            QMessageBox::information(this, "The witch has flown by.", "You saw a witch has flown by and droped two magical potion. \n(Magical Potion +2)");
+        }
+
+
+
+
+        }else if(step % 3 == 0 && roomName == "Cliff"){
+            if(ui->progressBar ->value() > 20){
+            ui->imgLb ->setPixmap(toQstr(":/resources/img/dropping_potion.png"));
+
+             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+            QMessageBox::information(this, "Cliff", "Opps,You almost fell off a cliff and lost two magical potion. \n(Magic Potion -2)");
+             }
+}
+            zork->getCharacter() ->takePotion(2);
+
+            int potionValue = zork ->getCharacter()->getPotion();
+            setProgressValue(button,potionValue);
+        }else if(step % 4 == 0 && roomName == "Cliff"){
+
+            ui->imgLb ->setPixmap(toQstr(":/resources/img/soldier.png"));
+
+             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+            QMessageBox::information(this, "A solider.", "A soldier is resting around cliff, wondering if you are the enemy...\n(Magical Potion +1)");
+}
+            zork->getCharacter() ->addPotion(1);
+            int potionValue = zork ->getCharacter()->getPotion();
+            setProgressValue(button,potionValue);
+
+        }
+
+}
+}
+
+bool MainWindow::wonGame(){
    int progressValue = ui->progressBar ->value();
    int bagItems = zork->getCharacter()->getNumItemInBag();
 
    if(progressValue == 100 && bagItems == 6){
+       zork->getCharacter()->removeItemsInBag("Magical Potion");
        QMessageBox::information(this,"!!!!  GREAT JOB  !!!!", "Hoooray!!, you save the land of the Loswilire and you are the master of power guardiance of this land.\n\n ******  MISSION FINISHED  ******");
-
+        return true;
    }
+   return false;
 }
+
 
 
 

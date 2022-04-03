@@ -23,12 +23,15 @@ public:
     string getShortDescription();
     string getLongDescription();
      void getMoving();
-   string getMove();
+   int getMove();
     int getPotion();
     void moveCounter(string noLoc);
     Item operator+(Item& item1);
     int getNumItemInBag();
     int setPotion(int value);
+    int takePotion(int value);
+    int addPotion(int value);
+    void removeItemsInBag(string name);
 
 };
 

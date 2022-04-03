@@ -61,8 +61,9 @@ private:
     void counter();
     void showElement(string itemN);
     void potionChange(int value);
-   void wonGame();
-
+   bool wonGame();
+   void setProgressValue(QPushButton *button,int value);
+void randChoice(QPushButton *button,QString directionOut);
 
 
 };

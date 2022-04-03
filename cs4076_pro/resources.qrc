@@ -17,5 +17,9 @@
         <file>img/wood.png</file>
         <file>img/magic_potion.png</file>
         <file>img/earth.png</file>
+        <file>img/troll_attack.png</file>
+        <file>img/dropping_potion.png</file>
+        <file>img/Mystery_Witch.png</file>
+        <file>img/soldier.png</file>
     </qresource>
 </RCC>

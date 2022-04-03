@@ -6,9 +6,9 @@ Character::Character(int move):move(move){  //initialise list
         potion = 0;
 }
 
- string Character::getMove(){
+int Character::getMove(){
 
-    return to_string(move);
+    return move;
 }
 
 inline void Character::getMoving(){
@@ -28,7 +28,7 @@ int Character::getPotion(){
 
     vector<Item>::iterator it;
     for(it = itemInBag.begin(); it != itemInBag.end(); it++){
-        if(it->getShortDescription() == "Magic Potion"){
+        if(it->getShortDescription() == "Magical Potion"){
             potion = it->getPotion();
 
             return potion;
@@ -42,7 +42,7 @@ int Character::getPotion(){
 int Character::setPotion(int value){
     vector<Item>::iterator it;
     for(it = itemInBag.begin(); it != itemInBag.end(); it++){
-        if(it->getShortDescription() == "Magic Potion"){
+        if(it->getShortDescription() == "Magical Potion"){
             potion  = value;
 
             return potion;
@@ -52,6 +52,45 @@ int Character::setPotion(int value){
         return potion;
 
 }
+
+int Character::takePotion(int value){
+    vector<Item>::iterator it;
+    for(it = itemInBag.begin(); it != itemInBag.end(); it++){
+        if(it->getShortDescription() == "Magical Potion"){
+            it->setPotion(potion - value);
+
+            return potion;
+
+        }
+    }
+        return potion;
+
+}
+
+void Character::removeItemsInBag(string name){
+    vector<Item>::iterator it;
+    for(it = itemInBag.begin(); it != itemInBag.end(); it++){
+        if(it->getShortDescription() == name){
+            itemInBag.erase(it);
+         }
+    }
+
+}
+
+int Character::addPotion(int value){
+    vector<Item>::iterator it;
+    for(it = itemInBag.begin(); it != itemInBag.end(); it++){
+        if(it->getShortDescription() == "Magical Potion"){
+           it->setPotion(potion + value);
+           return potion;
+
+
+
+        }
+    }
+        return potion;
+}
+
 
 
 
@@ -105,7 +144,7 @@ string Character::getLongDescription()
 
   for (int i = 0; i < getNumItemInBag(); i++){
 
-      if(itemInBag.at(i).getShortDescription() == "Magic Potion"){
+      if(itemInBag.at(i).getShortDescription() == "Magical Potion"){
           ret += "\t"+ itemInBag.at(i).getShortDescription() + " x"+ to_string( itemInBag.at(i).getPotion()) + "\n";
       }else{
 
