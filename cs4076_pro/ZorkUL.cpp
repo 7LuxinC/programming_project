@@ -55,7 +55,7 @@ void ZorkUL::createRooms()  {
 
     volcano = new Room("Volcano",":/resources/img/volcano.jpg");
         volcano ->addItem(new Item("Fire Gabbro",":/resources/img/fire.png"));
-        volcano ->addItem(new Item("Magical Potion",1,":/resources/img/magic_potion.png"));
+        volcano ->addItem(new Item("Magical Potion",2,":/resources/img/magic_potion.png"));
 
     sky = new Room("Sky City",":/resources/img/sky_city.jpg");
 

@@ -12,7 +12,7 @@
 #include <QColor>
 #include <QProgressBar>
 
-int m= 1;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -222,8 +222,17 @@ void MainWindow::hasTakeBtn(QString qs){
 
 ui -> listWidget ->clear();
     if(zork ->hasItems()){
+
+        if(zork ->hasItems() && zork->getCurrentRoom()->shortDescription() == "Sky City"){
+
+            // listItem();
+              ui -> collectBtn -> setEnabled(false);
+        }
+
         ui ->collectBtn->setEnabled(true);
         listItem();
+
+
     }else {
         ui -> collectBtn -> setEnabled(false);
 
@@ -447,7 +456,13 @@ bool MainWindow::wonGame(){
    int bagItems = zork->getCharacter()->getNumItemInBag();
 
    if(progressValue == 100 && bagItems == 6){
-       zork->getCharacter()->removeItemsInBag("Magical Potion");
+       ui->progressBar->setStyleSheet("QProgressBar::chunk{background-color: cyan;} QProgressBar {color: blue; font:bold}");
+
+        zork->getCurrentRoom()->addItem(new Item(zork->getCharacter()->givePotion()));
+
+       listItem();
+
+        zork->getCharacter()->removeItemsInBag("Magical Potion");
        QMessageBox::information(this,"!!!!  GREAT JOB  !!!!", "Hoooray!!, you save the land of the Loswilire and you are the master of power guardiance of this land.\n\n ******  MISSION FINISHED  ******");
         return true;
    }

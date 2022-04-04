@@ -53,6 +53,22 @@ int Character::setPotion(int value){
 
 }
 
+
+Item Character::givePotion(){
+    Item item;
+    int i = 0;
+    vector<Item>::iterator it;
+    for(it = itemInBag.begin(); it != itemInBag.end(); it++,i++){
+        if(it->getShortDescription() == "Magical Potion"){
+           item = itemInBag.at(i);    //copy constructor
+
+        }
+    }
+     return item;
+}
+
+
+
 int Character::takePotion(int value){
     vector<Item>::iterator it;
     for(it = itemInBag.begin(); it != itemInBag.end(); it++){

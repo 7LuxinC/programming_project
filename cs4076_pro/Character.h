@@ -33,6 +33,8 @@ public:
     int addPotion(int value);
     void removeItemsInBag(string name);
 
+    Item givePotion();
+
 };
 
 #endif /*CHARACTER_H_*/
