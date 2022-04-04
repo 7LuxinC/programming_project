@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QDebug>
 
 
 using namespace std;
@@ -17,17 +18,20 @@ void wordle::listOfWords(){
 
   QFile file(":/resources/word_list.txt");
 
-  if(!file.open(QFile::ReadOnly|QFile::Text)){
-    cout << "file is not open!!" << "\n";
-  }
 
-  QTextStream in(&file);
+  try{
+      file.open(QFile::ReadOnly|QFile::Text);
+      QTextStream in(&file);
 
-  while(!in.atEnd()){
-      QString line = in.readLine();
+      while(!in.atEnd()){
+          QString line = in.readLine();
 
-      string l = line.toStdString();
-      possibleWords.push_back(l);
+          string l = line.toStdString();
+          possibleWords.push_back(l);
+   }
+
+  }catch(std::exception& e){
+      qDebug() << "File is not open";
   }
 
 
