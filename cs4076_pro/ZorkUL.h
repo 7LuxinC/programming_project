@@ -5,9 +5,10 @@
 #include "Parser.h"
 #include "Room.h"
 #include "item.h"
-#include"Character.h"
+//#include"Character.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class ZorkUL {
@@ -15,30 +16,30 @@ class ZorkUL {
 static int const arrSize = 9;  // room array of pointer
 
 private:
-Character *character;
+
 	Parser parser;
     Room *currentRoom;
     Room *rooms[arrSize];
 	void createRooms();
-
     bool processCommand(Command command);
 
 
 public:
 	ZorkUL();
-    ~ZorkUL();
+    virtual ~ZorkUL();
 	void play();
     string go(string direction);
     string printHelp();
-    string printWelcome();
-    string teleport();
     string getPic();
     string showItems(int index);
     void goRoom(Command command);
-     bool hasItems();
+    bool hasItems();
+    string teleport();
+    virtual string getShortDescription();
     Room* getCurrentRoom();
-    Character* getCharacter();
 
+protected:
+    string printWelcome();
 
 };
 
