@@ -1,24 +1,12 @@
 #include <iostream>
-#include <QApplication>
 #include <string>
-#include <QPixmap>
 #include <stdlib.h>
 
-using namespace std;
+
 #include "ZorkUL.h"
-#include "mainwindow.h"
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc,argv);
-    MainWindow w;
+using namespace std;
 
-    //ZorkUL temp;
-    //temp.play();
-  w.setStyleSheet(".QWidget{background-image: url(:/resources/img/forest.jpg);}");
-   w.show();    //...show the main window
-   return app.exec();
-
-}
 
 ZorkUL::~ZorkUL(){
 
@@ -26,7 +14,7 @@ ZorkUL::~ZorkUL(){
 }
 
 ZorkUL::ZorkUL() {
-     character = new Character();
+
 	createRooms();
 }
 
@@ -62,7 +50,6 @@ void ZorkUL::createRooms()  {
     cliff = new Room("Cliff",":/resources/img/cliff.jpg");
 
 
-   //nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
 
    //--add all the room to pointer arrays
     rooms[0] = mainland;
@@ -97,11 +84,6 @@ Room* ZorkUL::getCurrentRoom(){
     return currentRoom;
 }
 
-Character* ZorkUL::getCharacter(){
-
-    return character;
-}
-
 
 /**
  *  Main play routine.  Loops until end of play.
@@ -126,10 +108,7 @@ void ZorkUL::play() {
 	cout << "end" << endl;
 }
 string ZorkUL::printWelcome() {
-    //cout << "start"<< endl;
-    //cout << "info for help"<< endl;
-    //cout << endl;
-    //cout << currentRoom->longDescription() << endl;
+
     string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation.\n\n";
     string curLoc = currentRoom -> longDescription();
     welcome = welcome + curLoc + "\n";
@@ -157,20 +136,6 @@ bool ZorkUL::processCommand(Command command) {
 	if (commandWord.compare("info") == 0)
 		printHelp();
 
-	else if (commandWord.compare("map") == 0)
-		{
-        cout << "[Volcano] ---[Sky World] ----- [Cliff]                       " << endl;
-        cout << "                 |                |                          " << endl;
-        cout << "                 |                |                          " << endl;
-        cout << "             [Main Land] ----- [farm] --- [Mysterious wood]  " << endl;
-        cout << "                 |                             |             " << endl;
-        cout << "                 |                             |             " << endl;
-        cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
-
-
-
-        }
-
 	else if (commandWord.compare("go") == 0)
 		goRoom(command);
 
@@ -179,47 +144,30 @@ bool ZorkUL::processCommand(Command command) {
       teleport();
       cout << currentRoom ->longDescription() << endl;
 
-    }else if (commandWord.compare("take") == 0){
+    }
 
-        if (!command.hasSecondWord()) {
-            cout << "incomplete input"<< endl;
-
-    }else if (command.hasSecondWord()) {
-        cout << "you're trying to take " + command.getSecondWord() << endl;
-        int location = currentRoom->isItemInRoom(command.getSecondWord());
-        if (location  < 0 )
-            cout << "item is not in room" << endl;
-        else{                                                                   //--add {} to avoid missleading indentation
-            cout << "item is in room" << endl;
-            cout << "index number " << + location << endl;
-            cout << endl;
-            cout << currentRoom->longDescription() << endl;
-        }
-        }
-    }else if (commandWord.compare("put") == 0)
+   /*
+    else if (commandWord.compare("map") == 0)
     {
+    cout << "[Volcano] ---[Sky World] ----- [Cliff]                       " << endl;
+    cout << "                 |                |                          " << endl;
+    cout << "                 |                |                          " << endl;
+    cout << "             [Main Land] ----- [farm] --- [Mysterious wood]  " << endl;
+    cout << "                 |                             |             " << endl;
+    cout << "                 |                             |             " << endl;
+    cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
+
+
 
     }
-    /*
-    {
-    if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
-        }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
-    }
-*/
-    else if (commandWord.compare("quit") == 0) {
-        if (command.hasSecondWord())
-            cout << "overdefined input"<< endl;
-        else
+    */
+    else if (commandWord.compare("quit") == 0)
             return true; /**signal to quit*/
-    }
+
     return false;
 }
+
+
 /** COMMANDS **/
 
 string ZorkUL::printHelp() {
@@ -280,4 +228,8 @@ string ZorkUL::showItems(int index){
     return currentRoom ->getItem(index);
 }
 
+
+string ZorkUL::getShortDescription(){
+    return "zork";
+}
 

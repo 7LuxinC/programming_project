@@ -27,16 +27,16 @@ private:
 public:
 	ZorkUL();
     virtual ~ZorkUL();
-	void play();
+    void play();
+    void goRoom(Command command);
     string go(string direction);
     string printHelp();
     string getPic();
     string showItems(int index);
-    void goRoom(Command command);
-    bool hasItems();
     string teleport();
-    virtual string getShortDescription();
     Room* getCurrentRoom();
+    bool hasItems();
+    virtual string getShortDescription();
 
 protected:
     string printWelcome();
