@@ -12,6 +12,7 @@
 #include <QColor>
 #include <QProgressBar>
 
+int num = 0;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -224,15 +225,13 @@ ui -> listWidget ->clear();
     if(zork ->hasItems()){
 
         if(zork ->hasItems() && zork->getCurrentRoom()->shortDescription() == "Sky City"){
-
-            // listItem();
               ui -> collectBtn -> setEnabled(false);
-        }
+        }else{
 
         ui ->collectBtn->setEnabled(true);
         listItem();
 
-
+    }
     }else {
         ui -> collectBtn -> setEnabled(false);
 
@@ -387,6 +386,7 @@ void MainWindow::setProgressValue(QPushButton *button,int value){
     }
    ui->progressBar ->setValue(value * 10);
 }
+
 }
 
 void MainWindow::randChoice(QPushButton *button,QString directionOut){
@@ -409,47 +409,119 @@ void MainWindow::randChoice(QPushButton *button,QString directionOut){
            }
 
         }else if(step % 4 == 0 && roomName == "Mysterious Wood"){
+
+             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+
+                 ui->imgLb ->setPixmap(toQstr(":/resources/img/Mystery_Witch.png"));
+            QMessageBox::information(this, "The witch has flown by.", "You saw a witch has flown by and droped two magical potion. \n(Magical Potion +2)");
+
             zork->getCharacter() ->addPotion(2);
 
             int potionValue = zork ->getCharacter()->getPotion();
             setProgressValue(button,potionValue);
 
-            ui->imgLb ->setPixmap(toQstr(":/resources/img/Mystery_Witch.png"));
-
-             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
-            QMessageBox::information(this, "The witch has flown by.", "You saw a witch has flown by and droped two magical potion. \n(Magical Potion +2)");
-        }
 
 
 
+   }
 
-        }else if(step % 3 == 0 && roomName == "Cliff"){
+        }else if(step % 4 == 0 && roomName == "Cliff"){
             if(ui->progressBar ->value() > 20){
             ui->imgLb ->setPixmap(toQstr(":/resources/img/dropping_potion.png"));
 
              if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
             QMessageBox::information(this, "Cliff", "Opps,You almost fell off a cliff and lost two magical potion. \n(Magic Potion -2)");
-             }
-}
+
+
             zork->getCharacter() ->takePotion(2);
 
             int potionValue = zork ->getCharacter()->getPotion();
             setProgressValue(button,potionValue);
-        }else if(step % 4 == 0 && roomName == "Cliff"){
+            }
+            }
+        }else if(step % 3 == 0 && roomName == "Cliff"){
 
-            ui->imgLb ->setPixmap(toQstr(":/resources/img/soldier.png"));
 
-             if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
-            QMessageBox::information(this, "A solider.", "A soldier is resting around cliff, wondering if you are the enemy...\n(Magical Potion +1)");
-}
-            zork->getCharacter() ->addPotion(1);
-            int potionValue = zork ->getCharacter()->getPotion();
-            setProgressValue(button,potionValue);
+                if(ui->progressBar ->value() > 20){
+                    ui->imgLb ->setPixmap(toQstr(":/resources/img/soldier.png"));
+
+                    if(directionOut != toQstr("*****Invalid direction,try different ways!*****")){
+                        if(num == 0){
+                            //set question
+                             setQuestion();
+                             num ++;
+                         }else if(num == 1){
+                        QMessageBox::information(this, "A Soldier", "You have a great chat with the soldier. \n(Magic Potion +1)");
+
+
+                        zork->getCharacter() ->addPotion(1);
+
+                        int potionValue = zork ->getCharacter()->getPotion();
+                        setProgressValue(button,potionValue);
+                        }
+                    }
+               }
+
+           }
+
 
         }
+     }
+
+
+
+
+
+void MainWindow::setQuestion(){
+
+    int sum1 = division<int>(1578,2);
+    float sum2 = division<float>(20.274,3.1);
+    float sum3 = division<float>(22.149,6.9);
+
+
+
+    QString quest = toQstr("There are some secret information in this paper,it would be great if you could help him to figure it out!\n\n");
+    QString quest1 = toQstr("  1. 1578 / 2 = ***  \n  2. 20.274 / 3.1 = ***\n  3. 22.149 / 6.9 = ***");
+    quest += quest1;
+    string yesAns = to_string(sum1) + "-" + to_string(sum2 ) + "-" + to_string(sum3);
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("A soldier");
+    msgBox.setInformativeText(quest);
+    msgBox.setAttribute(Qt::WA_MacShowFocusRect,false);     //enable yes as default (with blue outline)
+
+
+    QAbstractButton *yesBtn = msgBox.addButton(toQstr(yesAns),QMessageBox::YesRole);
+    QAbstractButton *noBtn = msgBox.addButton("987-6.4500000-3.1100000",QMessageBox::NoRole);
+    msgBox.exec();
+
+    if(msgBox.clickedButton() == yesBtn) {
+
+
+        zork->getCharacter()->addPotion(3);
+
+        int potionValue = zork ->getCharacter()->getPotion();
+        QPushButton *btn = new QPushButton(yesBtn);
+        setProgressValue(btn,potionValue);
+        delete btn;
+        QMessageBox::information(this,"Well done!","Great! You find a secret number for soldier and he gave you 3 potions. (Magical potion +3");
+
+
+    }else if(msgBox.clickedButton() == noBtn){
+
+        zork->getCharacter()->takePotion(1);
+        int potionValue = zork ->getCharacter()->getPotion();
+        QPushButton *btn = new QPushButton(yesBtn);
+        setProgressValue(btn,potionValue);
+        delete btn;
+        QMessageBox::information(this,"Run Away spell","You can't help the soldier and he is a bit angry, you used a spirit stone to activate the fly away spell.");
+
+   }
 
 }
-}
+
+
+
 
 bool MainWindow::wonGame(){
    int progressValue = ui->progressBar ->value();
@@ -467,6 +539,13 @@ bool MainWindow::wonGame(){
         return true;
    }
    return false;
+}
+
+template<class T>
+T MainWindow::division(T a, T b){    //template function
+    T sum;
+    sum = a / b;
+    return sum;
 }
 
 

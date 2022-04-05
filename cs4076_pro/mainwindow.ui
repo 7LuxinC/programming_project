@@ -227,6 +227,12 @@
          <property name="text">
           <string>NORTH</string>
          </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -314,6 +320,9 @@
            <width>30</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
          </property>
         </widget>
        </item>

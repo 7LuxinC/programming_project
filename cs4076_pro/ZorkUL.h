@@ -24,9 +24,6 @@ Character *character;
     bool processCommand(Command command);
 
 
-    void createItems();
-    void displayItems();
-
 public:
 	ZorkUL();
     ~ZorkUL();
@@ -41,6 +38,8 @@ public:
      bool hasItems();
     Room* getCurrentRoom();
     Character* getCharacter();
+
+
 };
 
 

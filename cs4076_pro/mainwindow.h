@@ -65,6 +65,12 @@ private:
    void setProgressValue(QPushButton *button,int value);
 void randChoice(QPushButton *button,QString directionOut);
 
+void setQuestion();
+
+
+template<class T>
+T division(T a, T b);
+
 
 };
 #endif // MAINWINDOW_H
