@@ -16,6 +16,7 @@ SOURCES += \
     Room.cpp \
     ZorkUL.cpp \
     item.cpp \
+    main.cpp \
     mainwindow.cpp \
     wordle.cpp \
     wordledialog.cpp

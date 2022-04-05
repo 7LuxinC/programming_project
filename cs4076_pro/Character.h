@@ -7,9 +7,9 @@ using namespace std;
 #include <vector>
 using std::vector;
 #include "Room.h"
+#include "ZorkUL.h"
 
-
-class Character {
+class Character :public ZorkUL {
 private:
     int move;
 
@@ -17,13 +17,15 @@ private:
 
      vector<Item> itemInBag;
      int potion;
+
 public:
+    virtual ~Character();
     void addItems(string description,Room& room);
     Character(int move = 0);    //default parameter in constructor
     string getShortDescription();
     string getLongDescription();
      void getMoving();
-   int getMove();
+  int getMove();
     int getPotion();
     void moveCounter(string noLoc);
     Item operator+(Item& item1);
@@ -32,7 +34,7 @@ public:
     int takePotion(int value);
     int addPotion(int value);
     void removeItemsInBag(string name);
-
+    string getWelcome();
     Item givePotion();
 
 };

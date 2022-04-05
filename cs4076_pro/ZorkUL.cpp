@@ -1,34 +1,23 @@
 #include <iostream>
-#include <QApplication>
+//#include <QApplication>
 #include <string>
 #include <QPixmap>
 #include <stdlib.h>
 
 using namespace std;
 #include "ZorkUL.h"
-#include "mainwindow.h"
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc,argv);
-    MainWindow w;
 
-    //ZorkUL temp;
-    //temp.play();
-  w.setStyleSheet(".QWidget{background-image: url(:/resources/img/forest.jpg);}");
-   w.show();    //...show the main window
-   return app.exec();
+ZorkUL::ZorkUL() {
 
+	createRooms();
 }
+
 
 ZorkUL::~ZorkUL(){
 
-
 }
 
-ZorkUL::ZorkUL() {
-     character = new Character();
-	createRooms();
-}
 
 void ZorkUL::createRooms()  {
     Room *mainland, *farm, *mysWood, *river, *cave, *forest, *volcano, *sky, *cliff;
@@ -40,20 +29,20 @@ void ZorkUL::createRooms()  {
    farm = new Room("Farm",":/resources/img/farm.jpg");
        farm->addItem(new Item("Fertile Soil",":/resources/img/earth.png"));
 
-    mysWood = new Room("Mysterious Wood",":/resources/img/mysterious_wood.jpg");
+   mysWood = new Room("Mysterious Wood",":/resources/img/mysterious_wood.jpg");
 
-    river = new Room("Riverside",":/resources/img/riverside.jpg");
+   river = new Room("Riverside",":/resources/img/riverside.jpg");
         river ->addItem(new Item("Spring Water",":/resources/img/water.png"));
 
-    cave = new Room("Cave",":/resources/img/dark_cave.jpg");
+   cave = new Room("Cave",":/resources/img/dark_cave.jpg");
         cave ->addItem(new Item("Gold Ore",":/resources/img/gold.png"));
         cave ->addItem(new Item("Magical Potion",1,":/resources/img/magic_potion.png"));
         cave ->addItem(new Item("Magical Potion",1,":/resources/img/magic_potion.png"));
 
-    forest = new Room("Forest",":/resources/img/forest.jpg");
+   forest = new Room("Forest",":/resources/img/forest.jpg");
         forest -> addItem(new Item("Wood Stick",":/resources/img/wood.png"));
 
-    volcano = new Room("Volcano",":/resources/img/volcano.jpg");
+   volcano = new Room("Volcano",":/resources/img/volcano.jpg");
         volcano ->addItem(new Item("Fire Gabbro",":/resources/img/fire.png"));
         volcano ->addItem(new Item("Magical Potion",2,":/resources/img/magic_potion.png"));
 
@@ -61,8 +50,6 @@ void ZorkUL::createRooms()  {
 
     cliff = new Room("Cliff",":/resources/img/cliff.jpg");
 
-
-   //nr = new Room("nr",":/resources/img/mainland.jpg");                                     //--create a newRoom object
 
    //--add all the room to pointer arrays
     rooms[0] = mainland;
@@ -97,39 +84,14 @@ Room* ZorkUL::getCurrentRoom(){
     return currentRoom;
 }
 
-Character* ZorkUL::getCharacter(){
 
-    return character;
+
+string ZorkUL::getShortDescription(){
+    return "zork";
 }
 
 
-/**
- *  Main play routine.  Loops until end of play.
- */
-void ZorkUL::play() {
-	printWelcome();
-
-	// Enter the main command loop.  Here we repeatedly read commands and
-	// execute them until the ZorkUL game is over.
-
-	bool finished = false;
-	while (!finished) {
-		// Create pointer to command and give it a command.
-		Command* command = parser.getCommand();
-		// Pass dereferenced command and check for end of game.
-		finished = processCommand(*command);
-		// Free the memory allocated by "parser.getCommand()"
-		//   with ("return new Command(...)")
-		delete command;
-	}
-	cout << endl;
-	cout << "end" << endl;
-}
 string ZorkUL::printWelcome() {
-    //cout << "start"<< endl;
-    //cout << "info for help"<< endl;
-    //cout << endl;
-    //cout << currentRoom->longDescription() << endl;
     string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation.\n\n";
     string curLoc = currentRoom -> longDescription();
     welcome = welcome + curLoc + "\n";
@@ -141,6 +103,7 @@ string ZorkUL::getPic(){
     string picpath = currentRoom ->getImg();
     return picpath;
 }
+
 
 /**
  * Given a command, process (that is: execute) the command.
@@ -157,21 +120,7 @@ bool ZorkUL::processCommand(Command command) {
 	if (commandWord.compare("info") == 0)
 		printHelp();
 
-	else if (commandWord.compare("map") == 0)
-		{
-        cout << "[Volcano] ---[Sky World] ----- [Cliff]                       " << endl;
-        cout << "                 |                |                          " << endl;
-        cout << "                 |                |                          " << endl;
-        cout << "             [Main Land] ----- [farm] --- [Mysterious wood]  " << endl;
-        cout << "                 |                             |             " << endl;
-        cout << "                 |                             |             " << endl;
-        cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
-
-
-
-        }
-
-	else if (commandWord.compare("go") == 0)
+    else if (commandWord.compare("go") == 0)
 		goRoom(command);
 
     else if (commandWord.compare("teleport") == 0)  {               //--create teleport condition
@@ -196,30 +145,27 @@ bool ZorkUL::processCommand(Command command) {
             cout << currentRoom->longDescription() << endl;
         }
         }
-    }else if (commandWord.compare("put") == 0)
-    {
+    }
 
-    }
-    /*
-    {
-    if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+    else if (commandWord.compare("map") == 0)
+        {
+        cout << "[Volcano] ---[Sky World] ----- [Cliff]                       " << endl;
+        cout << "                 |                |                          " << endl;
+        cout << "                 |                |                          " << endl;
+        cout << "             [Main Land] ----- [farm] --- [Mysterious wood]  " << endl;
+        cout << "                 |                             |             " << endl;
+        cout << "                 |                             |             " << endl;
+        cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
         }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
-    }
-*/
-    else if (commandWord.compare("quit") == 0) {
-        if (command.hasSecondWord())
-            cout << "overdefined input"<< endl;
-        else
+
+
+    else if (commandWord.compare("quit") == 0)
             return true; /**signal to quit*/
-    }
+
     return false;
 }
+
+
 /** COMMANDS **/
 
 string ZorkUL::printHelp() {
@@ -279,5 +225,17 @@ string ZorkUL::showItems(int index){
 
     return currentRoom ->getItem(index);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

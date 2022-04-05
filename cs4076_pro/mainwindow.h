@@ -6,6 +6,7 @@
 
 #include "ZorkUL.h"
 #include "wordledialog.h"
+#include "Character.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -48,7 +49,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    ZorkUL *zork;
+    //ZorkUL *zork;
+    Character *zorker;
     WordleDialog *wordleDialog;
    
     QString toQstr(string str);

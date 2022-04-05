@@ -6,13 +6,25 @@ Character::Character(int move):move(move){  //initialise list
         potion = 0;
 }
 
-int Character::getMove(){
+Character::~Character(){
+
+}
+
+ int Character::getMove(){
 
     return move;
 }
 
 inline void Character::getMoving(){
     move = move + 1;
+}
+
+
+
+
+string Character::getWelcome(){
+    string wel = printWelcome();
+    return wel;
 }
 
  void Character::moveCounter(string noLoc){

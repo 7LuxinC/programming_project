@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "ZorkUL.h"
-
+#include "Character.h"
 #include<QMessageBox>
 #include <string>
 #include <QString>
@@ -33,15 +33,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    zork = new ZorkUL();
-    QString qstr = QString::fromStdString(zork ->printWelcome());
+    zorker = new Character();
+
+
+    QString qstr = QString::fromStdString(zorker ->getWelcome());
     ui ->output -> setText(qstr);
 
 
-    ui->moveLb ->setText("MOVE: " + toQstr(to_string(zork->getCharacter()->getMove())));
+    ui->moveLb ->setText("MOVE: " + toQstr(to_string(zorker->getMove())));
 
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
     listItem();
@@ -49,16 +51,21 @@ MainWindow::MainWindow(QWidget *parent)
 
      ui->potionLb ->setText("MAGICAL POTION:");
 
-
 }
+
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    ZorkUL *zork = zorker;
     delete zork;
 
 
 }
+
+
 
 //change any string to Qstring
 QString MainWindow::toQstr(string str){
@@ -70,9 +77,9 @@ QString MainWindow::toQstr(string str){
 void MainWindow::on_messageBtn_clicked()
 {
     //this =this class
-    QMessageBox::about(this,"---WELCOME ヾ(*´▽‘*)ﾉ---", "You are now standing in the city of loswifire and you are a messenger guarding the five-colored spirit stones."
-                                                       " Suddenly one day, you find that the light of the five-colored spiritual stone is flickering, which means that the city is about to shake until it is destroyed. "
-                                                       "Check out countless books and you've finally found a way. It is recorded in the book that every 500 years, the energy of the five-color stone will weaken, "
+    QMessageBox::about(this,"---WELCOME ヾ(*´▽‘*)ﾉ---", "You are now standing in the land of Loswilire and you are the new guardiance the five-colored spiritual stones to take if they have enough power to prevent any enemy come to this land."
+                                                       "One day, you find that the light of the five-colored spiritual stone is flashing, which means the energy almost run out!"
+                                                       "You searched a lot of books for a solution and you've finally found a way. It is recorded in one of the books that every 500 years, the energy of the five-color stone will weaken, "
                                                        "and it is necessary to gather all the elements of gold, wood, water, fire, and earth to reactivate the energy source. "
                                                        "You will be ready to embark on a fantastic adventure. Check out the info to before starting the game.<(￣︶￣)↗ Let's starrrt!!!!");
 }
@@ -81,7 +88,7 @@ void MainWindow::on_messageBtn_clicked()
 void MainWindow::on_infoBtn_clicked()
 {
    //convert string to QString to met the infomation method
-   QString qstr = QString::fromStdString(zork->ZorkUL::printHelp());
+   QString qstr = QString::fromStdString(zorker->ZorkUL::printHelp());
    QMessageBox::information(this,"Information",qstr);
 
 }
@@ -105,8 +112,8 @@ void MainWindow::on_quitBtn_clicked()
 void MainWindow::counter(){
 
     string stay = ui->output->toPlainText().toStdString();
-    zork ->getCharacter() ->moveCounter(stay);
-    string move = to_string(zork ->getCharacter() ->getMove());
+    zorker ->moveCounter(stay);
+    string move = to_string(zorker ->getMove());
 
     ui->moveLb ->setText("MOVE: " + toQstr(move));
 
@@ -121,11 +128,11 @@ void MainWindow::counter(){
 void MainWindow::on_northBtn_clicked()
 {
 
-    QString s = toQstr( zork ->go("north"));
+    QString s = toQstr( zorker ->go("north"));
 
     ui -> output ->setText(s);
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
     counter();
@@ -140,11 +147,11 @@ void MainWindow::on_northBtn_clicked()
 
 void MainWindow::on_eastBtn_clicked()
 {
-    QString s = toQstr( zork ->go("east"));
+    QString s = toQstr( zorker ->go("east"));
 
     ui -> output ->setText(s);
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
     counter();
@@ -161,11 +168,11 @@ void MainWindow::on_eastBtn_clicked()
 
 void MainWindow::on_west_clicked()
 {
-    QString s = toQstr( zork ->go("west"));
+    QString s = toQstr( zorker ->go("west"));
 
     ui -> output ->setText(s);
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
 
     counter();
@@ -180,12 +187,12 @@ randChoice(ui->west,s);
 
 void MainWindow::on_southBtn_clicked()
 {
-    QString s = toQstr(zork ->go("south"));
+    QString s = toQstr(zorker ->go("south"));
 
 
     ui -> output ->setText(s);
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
     counter();
     hasTakeBtn(s);
@@ -201,11 +208,11 @@ void MainWindow::on_southBtn_clicked()
 
 void MainWindow::on_teleportBtn_clicked()
 {
-    QString s = toQstr("Zfffffft transfer completed.~~~\n\nCurrent Location:\n"  + zork -> teleport());
+    QString s = toQstr("Zfffffft transfer completed.~~~\n\nCurrent Location:\n"  + zorker -> teleport());
 
     ui -> output ->setText(s);
 
-    QPixmap pix1(toQstr(zork ->getPic()));
+    QPixmap pix1(toQstr(zorker ->getPic()));
     ui -> imgLb -> setPixmap(pix1);
     counter();
     hasTakeBtn(s);
@@ -222,9 +229,9 @@ void MainWindow::on_teleportBtn_clicked()
 void MainWindow::hasTakeBtn(QString qs){
 
 ui -> listWidget ->clear();
-    if(zork ->hasItems()){
+    if(zorker ->hasItems()){
 
-        if(zork ->hasItems() && zork->getCurrentRoom()->shortDescription() == "Sky City"){
+        if(zorker->hasItems() && zorker->getCurrentRoom()->shortDescription() == "Sky City"){
               ui -> collectBtn -> setEnabled(false);
         }else{
 
@@ -246,9 +253,9 @@ ui -> listWidget ->clear();
 void MainWindow::listItem(){
 
 
-    int itemsize = zork -> getCurrentRoom()->getItemSize();
+    int itemsize = zorker -> getCurrentRoom()->getItemSize();
     for(int i = 0 ; i < itemsize; i++){
-        QString itemlist = toQstr(zork ->showItems(i));
+        QString itemlist = toQstr(zorker ->showItems(i));
         ui -> listWidget ->addItem(itemlist);
 
 
@@ -263,19 +270,19 @@ void MainWindow::collectItems(){
     QListWidgetItem *it = ui ->listWidget->takeItem(rowOfItems);  //get the selected item in list
 
 
-    string foundItem = zork ->getCurrentRoom()->searchItem(rowOfItems);       //search matching item in room
+    string foundItem = zorker->getCurrentRoom()->searchItem(rowOfItems);       //search matching item in room
  showElement(foundItem);
 
-    zork ->getCharacter()->addItems(foundItem,*zork ->getCurrentRoom());      //add item in player's bag
+    zorker->addItems(foundItem,*zorker ->getCurrentRoom());      //add item in player's bag
 
 
 
 
 
-    zork ->getCurrentRoom() ->removeItemFromRoom(rowOfItems);   //remove the item in room
+    zorker ->getCurrentRoom() ->removeItemFromRoom(rowOfItems);   //remove the item in room
 
     //details:
-    string currItemDetail = zork -> getCurrentRoom() ->longDescription();
+    string currItemDetail = zorker -> getCurrentRoom() ->longDescription();
     ui->output->append("----------------------------------------");
     ui ->output -> append(toQstr("\n" + currItemDetail));
     showItemsInBag();
@@ -290,14 +297,14 @@ void MainWindow::collectItems(){
 
 
 void MainWindow::showElement(string itemN){
-    string imgP = zork->getCurrentRoom()->getItemImage(itemN);
+    string imgP = zorker->getCurrentRoom()->getItemImage(itemN);
 
     if(itemN == "Magical Potion"){
 
        // ui->element1 ->setText(toQstr(itemN));
          ui -> element1 -> setPixmap(toQstr(imgP));
 
-         if(zork ->getCharacter()->getPotion() == 0){
+         if(zorker->getPotion() == 0){
              ui->element1 ->clear();
          }
     }else if(itemN == "Fertile Soil"){
@@ -320,13 +327,13 @@ void MainWindow::on_collectBtn_clicked()
 
     collectItems();
 
-    int value = zork->getCharacter()->getPotion();
+    int value = zorker->getPotion();
     setProgressValue(ui->collectBtn,value);
 
 }
 
 void MainWindow::showItemsInBag(){
-     ui -> output -> append(toQstr(zork ->getCharacter() ->getLongDescription()));
+     ui -> output -> append(toQstr(zorker ->getLongDescription()));
 }
 
 void MainWindow::on_bag_clicked()
@@ -339,8 +346,8 @@ void MainWindow::on_bag_clicked()
 
 void MainWindow::checkWordleQuizz(){
 
-    if(zork ->getCurrentRoom()->shortDescription() == "Sky City"){
-        if(zork->getCharacter()->getNumItemInBag() != 0){
+    if(zorker ->getCurrentRoom()->shortDescription() == "Sky City"){
+        if(zorker->getNumItemInBag() != 0){
 
         ui ->activation ->setEnabled(true);
         }
@@ -365,7 +372,7 @@ void MainWindow::on_activation_clicked()
 
     if(wordleDialog ->winGame()){
          setProgressValue(ui->activation,10);
-        zork->getCharacter()->setPotion(10);
+        zorker->setPotion(10);
     }
 
     delete wordleDialog;
@@ -390,14 +397,14 @@ void MainWindow::setProgressValue(QPushButton *button,int value){
 }
 
 void MainWindow::randChoice(QPushButton *button,QString directionOut){
-    int step = zork->getCharacter()->getMove();
-    string roomName = zork -> getCurrentRoom()->shortDescription();
+    int step = zorker->getMove();
+    string roomName = zorker -> getCurrentRoom()->shortDescription();
 
-    if(zork->getCharacter()->getPotion() != 0 && ui->progressBar ->value() != 100){
+    if(zorker->getPotion() != 0 && ui->progressBar ->value() != 100){
         if(step % 3 == 0 && roomName == "Mysterious Wood" ){
             if(ui->progressBar ->value() > 10){
-            zork->getCharacter() ->takePotion(1);
-            int potionValue = zork ->getCharacter()->getPotion();
+            zorker ->takePotion(1);
+            int potionValue = zorker->getPotion();
             setProgressValue(button,potionValue);
 
             ui->imgLb ->setPixmap(toQstr(":/resources/img/troll_attack.png"));
@@ -415,9 +422,9 @@ void MainWindow::randChoice(QPushButton *button,QString directionOut){
                  ui->imgLb ->setPixmap(toQstr(":/resources/img/Mystery_Witch.png"));
             QMessageBox::information(this, "The witch has flown by.", "You saw a witch has flown by and droped two magical potion. \n(Magical Potion +2)");
 
-            zork->getCharacter() ->addPotion(2);
+            zorker ->addPotion(2);
 
-            int potionValue = zork ->getCharacter()->getPotion();
+            int potionValue = zorker->getPotion();
             setProgressValue(button,potionValue);
 
 
@@ -433,9 +440,9 @@ void MainWindow::randChoice(QPushButton *button,QString directionOut){
             QMessageBox::information(this, "Cliff", "Opps,You almost fell off a cliff and lost two magical potion. \n(Magic Potion -2)");
 
 
-            zork->getCharacter() ->takePotion(2);
+            zorker ->takePotion(2);
 
-            int potionValue = zork ->getCharacter()->getPotion();
+            int potionValue = zorker->getPotion();
             setProgressValue(button,potionValue);
             }
             }
@@ -454,9 +461,9 @@ void MainWindow::randChoice(QPushButton *button,QString directionOut){
                         QMessageBox::information(this, "A Soldier", "You have a great chat with the soldier. \n(Magic Potion +1)");
 
 
-                        zork->getCharacter() ->addPotion(1);
+                        zorker ->addPotion(1);
 
-                        int potionValue = zork ->getCharacter()->getPotion();
+                        int potionValue = zorker->getPotion();
                         setProgressValue(button,potionValue);
                         }
                     }
@@ -488,20 +495,23 @@ void MainWindow::setQuestion(){
     QMessageBox msgBox;
     msgBox.setWindowTitle("A soldier");
     msgBox.setInformativeText(quest);
-    msgBox.setAttribute(Qt::WA_MacShowFocusRect,false);     //enable yes as default (with blue outline)
 
 
     QAbstractButton *yesBtn = msgBox.addButton(toQstr(yesAns),QMessageBox::YesRole);
     QAbstractButton *noBtn = msgBox.addButton("987-6.4500000-3.1100000",QMessageBox::NoRole);
+
+
     msgBox.exec();
 
     if(msgBox.clickedButton() == yesBtn) {
 
-
-        zork->getCharacter()->addPotion(3);
-
-        int potionValue = zork ->getCharacter()->getPotion();
         QPushButton *btn = new QPushButton(yesBtn);
+
+        zorker->addPotion(3);
+
+        int potionValue = zorker->getPotion();
+
+
         setProgressValue(btn,potionValue);
         delete btn;
         QMessageBox::information(this,"Well done!","Great! You find a secret number for soldier and he gave you 3 potions. (Magical potion +3");
@@ -509,9 +519,10 @@ void MainWindow::setQuestion(){
 
     }else if(msgBox.clickedButton() == noBtn){
 
-        zork->getCharacter()->takePotion(1);
-        int potionValue = zork ->getCharacter()->getPotion();
-        QPushButton *btn = new QPushButton(yesBtn);
+        zorker->takePotion(1);
+        int potionValue = zorker->getPotion();
+        QPushButton *btn = new QPushButton(noBtn);
+
         setProgressValue(btn,potionValue);
         delete btn;
         QMessageBox::information(this,"Run Away spell","You can't help the soldier and he is a bit angry, you used a spirit stone to activate the fly away spell.");
@@ -525,16 +536,16 @@ void MainWindow::setQuestion(){
 
 bool MainWindow::wonGame(){
    int progressValue = ui->progressBar ->value();
-   int bagItems = zork->getCharacter()->getNumItemInBag();
+   int bagItems = zorker->getNumItemInBag();
 
    if(progressValue == 100 && bagItems == 6){
        ui->progressBar->setStyleSheet("QProgressBar::chunk{background-color: cyan;} QProgressBar {color: blue; font:bold}");
 
-        zork->getCurrentRoom()->addItem(new Item(zork->getCharacter()->givePotion()));
+        zorker->getCurrentRoom()->addItem(new Item(zorker->givePotion()));
 
        listItem();
 
-        zork->getCharacter()->removeItemsInBag("Magical Potion");
+        zorker->removeItemsInBag("Magical Potion");
        QMessageBox::information(this,"!!!!  GREAT JOB  !!!!", "Hoooray!!, you save the land of the Loswilire and you are the master of power guardiance of this land.\n\n ******  MISSION FINISHED  ******");
         return true;
    }
