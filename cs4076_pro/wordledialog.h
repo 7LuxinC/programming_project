@@ -5,7 +5,7 @@
 #include <string>
 #include "wordle.h"
 
-
+using namespace std;
 
 namespace Ui {
 class WordleDialog;
@@ -27,12 +27,10 @@ private slots:
 
 private:
     Ui::WordleDialog *ui;
-    const int max = 6;
-
     wordle *wordleGame;
     void wordWithColor(string word);
     bool wonOrLost;
-
+    const int max = 6;                                                          //constant variable
 };
 
 #endif // WORDLEDIALOG_H

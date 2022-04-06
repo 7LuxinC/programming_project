@@ -7,7 +7,6 @@
 #include <QDebug>
 
 
-using namespace std;
 
 wordle::wordle(){
 
@@ -41,38 +40,33 @@ void wordle::listOfWords(){
 }
 
 /** set a guess-word for player to guess*/
-  void wordle::setGuessWord(){
+void wordle::setGuessWord(){
     int size;
     srand(time(0));
 
     size = possibleWords.size();
     int in = rand() % size ;
-    guessWord = possibleWords.at(in );
-  }
+    guessWord = possibleWords.at(in);
+}
 
 /** get the guess word */
-  string wordle::getGuessWord(){
+string wordle::getGuessWord(){
     return guessWord;
-  }
+}
 
-  string wordle::setAttemptWord(string word){
-      this->attemptWord = word;
+/**get the attempted word */
+string wordle::getAttemptWord(){
       return attemptWord;
-  }
+}
 
 
-  string wordle::getAttemptWord(){
-
-
-      return attemptWord;
-  }
-
-
+/** check if the word valid from specific file(words you store in vector) the system provided */
 bool wordle::validWord(string word){
   if(word.length() != 5){
     return false;
   }
-word  = toLower(word);
+
+  word  = toLower(word);
 
   for(int i = 0; i < MAX; i++){
     if(possibleWords.at(i) == word){  //check the word you typed if it existed in the wordfile list
@@ -82,6 +76,7 @@ word  = toLower(word);
   return false;
 }
 
+/** make all letter lowercase*/
 string wordle::toLower(string word){
   int n = word.length();
 
@@ -91,7 +86,7 @@ string wordle::toLower(string word){
   return word;
 }
 
-
+/**check if the word match the guess word*/
 bool wordle::winGame(string word){
 
   word = toLower(word);
@@ -103,6 +98,7 @@ bool wordle::winGame(string word){
 
   }
 
+/** set the Game*/
 string wordle::setGame(){
  listOfWords();
  setGuessWord();
@@ -113,35 +109,33 @@ string wordle::setGame(){
   }
 
 
+/**check a word you guessed if matching the guess word*/
 void wordle::checkWord(string word){
 
-   setAttemptWord(word);
+   attemptWord = "xxxxx";                   //x = blue color
 
-  for(int i = 0; i < 5; i++){
-      bool wrongPlace = false;
-      bool rightPlace = false;
-    if(guessWord[i] == word[i]){    //correct letter in right place
-
-      attemptWord[i] = 'g';   //g = green color
-      rightPlace = true;
+    if(word == guessWord){
+        attemptWord ="ggggg";
 
     }else{
 
-      for(int in = 0; in < 5; in++){
-        if(word[i] == guessWord[in]){   //correct letter in wrong place
+        for(int i = 0; i < 5; i++){
 
-            wrongPlace = true;//y = yellow color
+            if(guessWord[i] == word[i]){    //correct letter in right place
+
+                attemptWord[i] = 'g';   //g = green color
+
+            }else{
+
+                for(int j = 0; j < 5; j++){
+                    if(guessWord[i] == word[j]){    //if letters exist in the guess word.
+
+                        attemptWord[j] = 'y';   //y = yellow color
+
+                    }
+                }
+            }
+
         }
-      }
-
-      if(wrongPlace == true){
-        attemptWord[i]= 'y';
-      }
     }
-if(wrongPlace == false && rightPlace == false){
-      attemptWord[i] = 'x';    //x = no color    // irrelevant letter
-    }
- }
-
-
 }

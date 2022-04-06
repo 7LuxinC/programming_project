@@ -1,22 +1,17 @@
 #include <iostream>
 #include <string>
-#include <stdlib.h>
-
-
 #include "ZorkUL.h"
 
-using namespace std;
 
 
 ZorkUL::~ZorkUL(){
-
-
 }
+
 
 ZorkUL::ZorkUL() {
-
 	createRooms();
 }
+
 
 void ZorkUL::createRooms()  {
     Room *mainland, *farm, *mysWood, *river, *cave, *forest, *volcano, *sky, *cliff;
@@ -64,7 +59,6 @@ void ZorkUL::createRooms()  {
 
 
 
-
 //             (N, E, S, W)
     mainland->setExits(sky, farm, cave, NULL);
     farm->setExits(cliff, mysWood, NULL, mainland);
@@ -80,33 +74,14 @@ void ZorkUL::createRooms()  {
         currentRoom = mainland;
 }
 
+
+//get the current room
 Room* ZorkUL::getCurrentRoom(){
     return currentRoom;
 }
 
 
-/**
- *  Main play routine.  Loops until end of play.
- */
-void ZorkUL::play() {
-	printWelcome();
-
-	// Enter the main command loop.  Here we repeatedly read commands and
-	// execute them until the ZorkUL game is over.
-
-	bool finished = false;
-	while (!finished) {
-		// Create pointer to command and give it a command.
-		Command* command = parser.getCommand();
-		// Pass dereferenced command and check for end of game.
-		finished = processCommand(*command);
-		// Free the memory allocated by "parser.getCommand()"
-		//   with ("return new Command(...)")
-		delete command;
-	}
-	cout << endl;
-	cout << "end" << endl;
-}
+//welcom message of the game
 string ZorkUL::printWelcome() {
 
     string welcome = "Welcome to the Land of Loswilire! \n\nCheck out the message and info button for more infomation.\n\n";
@@ -116,20 +91,22 @@ string ZorkUL::printWelcome() {
     return welcome;
 }
 
+
+//get room picture
 string ZorkUL::getPic(){
     string picpath = currentRoom ->getImg();
     return picpath;
 }
+
 
 /**
  * Given a command, process (that is: execute) the command.
  * If this command ends the ZorkUL game, true is returned, otherwise false is
  * returned.
  */
-bool ZorkUL::processCommand(Command command) {
+void ZorkUL::processCommand(Command command) {
     if (command.isUnknown()) {
 		cout << "invalid input"<< endl;
-		return false;
 	}
 
 	string commandWord = command.getCommandWord();
@@ -139,12 +116,8 @@ bool ZorkUL::processCommand(Command command) {
 	else if (commandWord.compare("go") == 0)
 		goRoom(command);
 
-    else if (commandWord.compare("teleport") == 0)  {               //--create teleport condition
-
-      teleport();
-      cout << currentRoom ->longDescription() << endl;
-
-    }
+    else if (commandWord.compare("teleport") == 0)             //--create teleport condition
+        teleport();
 
    /*
     else if (commandWord.compare("map") == 0)
@@ -156,27 +129,23 @@ bool ZorkUL::processCommand(Command command) {
     cout << "                 |                             |             " << endl;
     cout << "                 |                             |             " << endl;
     cout << "[Forest] --- [Dark Cave] ----------------- [River Side]      " << endl;
-
-
-
     }
     */
-    else if (commandWord.compare("quit") == 0)
-            return true; /**signal to quit*/
 
-    return false;
 }
 
-
-/** COMMANDS **/
-
+//help information
 string ZorkUL::printHelp() {
-    //cout << "valid inputs are; " << endl;
-    string infos = "Valid inputs are: \n" + parser.showCommands();
+    string infos = "Valid inputs are: \n" + parser.showCommands() + "\n\nValid buttons are:\nnorth south east west teleport collect activate bag message help quit\n\n";
+    string info2 = "Collect button:\nTo collect a item, click the item and press the collect a item button\n\nActivate button:\n only appear in the sky city and you "
+                   "can access to the wordle game challenge to fill up your magic potion more quicker(only you win the game) and you can activate your potion when reach 100% power\n\n"
+                   "Bag button:\nShow what items you collected. Message button: Brief information about the game.\n\nQuit button:\nQuit the program.";
+    infos = infos + info2;
     return infos;
-
 }
 
+
+//go specific Room from the direction provided
 void ZorkUL::goRoom(Command command) {
 	if (!command.hasSecondWord()) {
 		cout << "incomplete input"<< endl;
@@ -187,15 +156,12 @@ void ZorkUL::goRoom(Command command) {
 
 	// Try to leave current room.
 	Room* nextRoom = currentRoom->nextRoom(direction);
+    currentRoom = nextRoom;
 
-	if (nextRoom == NULL)
-		cout << "underdefined input"<< endl;
-	else {
-		currentRoom = nextRoom;
-		cout << currentRoom->longDescription() << endl;
-	}
 }
 
+
+//go to the next room
 string ZorkUL::go(string direction) {
 	//Make the direction lowercase
 	//transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
@@ -210,6 +176,8 @@ string ZorkUL::go(string direction) {
 	}
 }
 
+
+//transfer to any room
 string ZorkUL::teleport(){
     srand(time(0));          //--initalize random number generator
 
@@ -219,17 +187,21 @@ string ZorkUL::teleport(){
     return currentRoom -> longDescription();
 }
 
+
+//check if the current room has room or not
 bool ZorkUL::hasItems(){
     return currentRoom -> hasItem();
 }
 
+
+//show specific item in the room
 string ZorkUL::showItems(int index){
 
     return currentRoom ->getItem(index);
 }
 
-
+//get the description of the zork;
 string ZorkUL::getShortDescription(){
-    return "zork";
+    return "The Land of Loswilire";
 }
 

@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 class Item {
@@ -14,9 +15,7 @@ private:
 	string longDescription;
     string imagePath;
     int potion;
-    //int weightGrams;
-    //float value;
-    //bool weaponCheck;
+
 
 public:
     Item (string description, string imgPath);
@@ -25,10 +24,6 @@ public:
     string getLongDescription();
     int getPotion();
     void setPotion(int numPotion);
-    //int getWeight();
-    //void setWeight(int weightGrams);
-    //float getValue();
-    //void setValue(float value);
 	int getWeaponCheck();
 	void setWeaponCheck(int weaponCheck);
     string getImagePath();

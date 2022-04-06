@@ -1,0 +1,14 @@
+release/Character.o
+release/Command.o
+release/CommandWords.o
+release/Parser.o
+release/Room.o
+release/ZorkUL.o
+release/item.o
+release/main.o
+release/mainwindow.o
+release/wordle.o
+release/wordledialog.o
+release/qrc_resources.o
+release/moc_mainwindow.o
+release/moc_wordledialog.o

@@ -4,8 +4,6 @@
 #include "Command.h"
 #include "Parser.h"
 #include "Room.h"
-#include "item.h"
-//#include"Character.h"
 #include <iostream>
 #include <string>
 
@@ -13,21 +11,20 @@ using namespace std;
 
 class ZorkUL {
 
-static int const arrSize = 9;  // room array of pointer
+static int const arrSize = 9;  // constant static variable
 
 private:
 
 	Parser parser;
     Room *currentRoom;
-    Room *rooms[arrSize];
+    Room *rooms[arrSize];           //array of pointer
 	void createRooms();
-    bool processCommand(Command command);
+    void processCommand(Command command);
 
 
 public:
 	ZorkUL();
     virtual ~ZorkUL();
-    void play();
     void goRoom(Command command);
     string go(string direction);
     string printHelp();

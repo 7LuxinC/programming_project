@@ -1,12 +1,10 @@
 #include <iostream>
 #include <QApplication>
-
 #include <QPixmap>
-#include <stdlib.h>
-
-using namespace std;
 #include "ZorkUL.h"
 #include "mainwindow.h"
+
+using namespace std;
 
 int main(int argc, char *argv[]) {
     QApplication app(argc,argv);
@@ -14,7 +12,8 @@ int main(int argc, char *argv[]) {
 
     //ZorkUL temp;
     //temp.play();
-   w.setStyleSheet(".QWidget{background-image: url(:/resources/img/forest.jpg);}");
+
+   w.setStyleSheet(".QWidget{background-image: url(:/resources/img/background.png);}");
    w.show();    //...show the main window
    return app.exec();
 

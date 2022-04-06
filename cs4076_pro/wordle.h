@@ -2,11 +2,9 @@
 #define WORDLE_H
 
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <time.h>
 #include <string>
-//#include <cctype>
 
 using namespace std;
 
@@ -32,7 +30,6 @@ class wordle{
        bool winGame(string word);
        string setGame();
        void checkWord(string word);
-      string setAttemptWord(string word);
        string getAttemptWord();
 
 

@@ -21,5 +21,7 @@
         <file>img/dropping_potion.png</file>
         <file>img/Mystery_Witch.png</file>
         <file>img/soldier.png</file>
+        <file>img/Loswilire.ico</file>
+        <file>img/background.png</file>
     </qresource>
 </RCC>

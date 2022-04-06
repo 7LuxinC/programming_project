@@ -1,27 +1,42 @@
-
+#include <QPixmap>
 #include "Room.h"
 #include "Command.h"
 
-#include <QPixmap>
-
-
+/**
+ * @brief Room::Room
+ * @param description
+ * @param imgPath
+ */
 Room::Room(string description,string imgPath) {
 	this->description = description;
     this ->imgPath = imgPath;
-
 }
 
+/**
+ * @brief Room::getImg
+ * @return
+ */
 string Room::getImg(){
     return this->imgPath;
 }
 
+
+/**
+ * @brief Room::getItemSize   number of items in room
+ * @return
+ */
 int Room::getItemSize(){
     int sum = itemsInRoom.size();
     return sum;
 }
 
-
-
+/**
+ * @brief Room::setExits  check if there is room in any direction
+ * @param north
+ * @param east
+ * @param south
+ * @param west
+ */
 void Room::setExits(Room *north, Room *east, Room *south, Room *west) {
 	if (north != NULL)
 		exits["north"] = north;
@@ -33,14 +48,29 @@ void Room::setExits(Room *north, Room *east, Room *south, Room *west) {
 		exits["west"] = west;
 }
 
+
+/**
+ * @brief Room::shortDescription   get room name
+ * @return
+ */
 string Room::shortDescription() {
 	return description;
 }
 
+
+/**
+ * @brief Room::longDescription     current location and items in the room
+ * @return
+ */
 string Room::longDescription() {
     return "Current location = " + description + ".\n" + displayItem() + exitString();
 }
 
+
+/**
+ * @brief Room::exitString         show which direction is available for player to go to other rooms
+ * @return
+ */
 string Room::exitString() {
 	string returnString = "\nexits =";
 	for (map<string, Room*>::iterator i = exits.begin(); i != exits.end(); i++)
@@ -49,6 +79,12 @@ string Room::exitString() {
 	return returnString;
 }
 
+
+/**
+ * @brief Room::nextRoom        store direction and room ,if match the direction then player can go to next room
+ * @param direction
+ * @return
+ */
 Room* Room::nextRoom(string direction) {
 	map<string, Room*>::iterator next = exits.find(direction); //returns an iterator for the "pair"
 	if (next == exits.end())
@@ -57,12 +93,23 @@ Room* Room::nextRoom(string direction) {
 				// part of the "pair" (<string, Room*>) and return it.
 }
 
+
+/**
+ * @brief Room::addItem         add item in the room.
+ * @param inItem
+ */
 void Room::addItem(Item *inItem) {
     //cout <<endl;
     //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
 }
 
+
+/**
+ * @brief Room::getItemImage     get specific item image
+ * @param itemname
+ * @return
+ */
 string Room::getItemImage(string itemname){
 
 
@@ -76,6 +123,10 @@ string Room::getItemImage(string itemname){
 
 
 
+/**
+ * @brief Room::removeItemFromRoom   remove a specific item in room
+ * @param index
+ */
 void Room::removeItemFromRoom(int index){
     int i = 0;
 
@@ -90,6 +141,10 @@ void Room::removeItemFromRoom(int index){
 }
 
 
+/**
+ * @brief Room::displayItem   show what item in the room
+ * @return
+ */
 string Room::displayItem() {
 
     string tempString = "Elements in Current Location :";
@@ -106,34 +161,21 @@ string Room::displayItem() {
         }
     return tempString;
 
-    }
+}
 
+
+/**
+ * @brief Room::numberOfItems   no. of items in the room
+ * @return
+ */
 int Room::numberOfItems() {
     return itemsInRoom.size();
 }
 
-int Room::isItemInRoom(string inString)
-{
-    int sizeItems = (itemsInRoom.size());
-    if (itemsInRoom.size() < 1) {
-        return false;
-        }
-    else if (hasItem()) {
-       int x = (0);
-        for (int n = sizeItems; n > 0; n--) {
-            // compare inString with short description
-            int tempFlag = inString.compare( itemsInRoom[x].getShortDescription());
-            if (tempFlag == 0) {
-                itemsInRoom.erase(itemsInRoom.begin()+x);
-                return x;
-            }
-            x++;
-            }
-        }
-    return -1;
-}
-
-
+/**
+ * @brief Room::hasItem    check if the room has item
+ * @return
+ */
 bool Room::hasItem(){
     if(itemsInRoom.size() > 0){
         return true;
@@ -142,20 +184,13 @@ bool Room::hasItem(){
     return false;
 }
 
+
+/**
+ * @brief Room::getItem      //get specific item in room
+ * @param index
+ * @return
+ */
 string Room::getItem(int index){
-    int itemSize = itemsInRoom.size();
-    string itemname = "";
-
-    for(int i = 0; i < itemSize; i++){
-        if(i == index){
-            itemname = itemsInRoom[i].getShortDescription();
-        }
-    }
-
-    return itemname;
-}
-
-string Room::searchItem(int index){
     string str = "";
     int i = 0;
 
@@ -163,8 +198,7 @@ string Room::searchItem(int index){
 
     for(it = itemsInRoom.begin(); it != itemsInRoom.end(); it++,i++){
         if(i == index){
-            str = itemsInRoom.at(i).getShortDescription();
-
+            str = it->getShortDescription();
         }
     }
     return str;
