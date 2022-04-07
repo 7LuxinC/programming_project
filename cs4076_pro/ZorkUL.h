@@ -25,6 +25,7 @@ private:
 public:
 	ZorkUL();
     virtual ~ZorkUL();
+    virtual int getMove() = 0;                  //abstract class
     void goRoom(Command command);
     string go(string direction);
     string printHelp();

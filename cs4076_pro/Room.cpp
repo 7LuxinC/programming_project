@@ -99,8 +99,6 @@ Room* Room::nextRoom(string direction) {
  * @param inItem
  */
 void Room::addItem(Item *inItem) {
-    //cout <<endl;
-    //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
 }
 
@@ -111,8 +109,6 @@ void Room::addItem(Item *inItem) {
  * @return
  */
 string Room::getItemImage(string itemname){
-
-
     for(int i = 0; i < getItemSize(); i++){
         if(itemsInRoom.at(i).getShortDescription() == itemname){
              return itemsInRoom.at(i).getImagePath();

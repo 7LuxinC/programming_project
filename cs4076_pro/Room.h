@@ -14,7 +14,7 @@ using std::vector;
 
 class Room {
 
-    friend class Character;
+    friend class Character;                 //friend class
 
 private:
 	string description;
@@ -28,21 +28,18 @@ private:
 public:
     int numberOfItems();
     Room(string description,string imgPath);
-	void setExits(Room *north, Room *east, Room *south, Room *west);
+    void setExits(Room *north, Room *east, Room *south, Room *west);
 	string shortDescription();
 	string longDescription();
 	Room* nextRoom(string direction);
     void addItem(Item *inItem);
     string displayItem();
     int isItemInRoom(string inString);
-   void removeItemFromRoom(int index);
-   //string setPic();
-   string getImg();
-   bool hasItem();
-   string getItem(int index);
-
+    void removeItemFromRoom(int index);
+    string getImg();
+    bool hasItem();
+    string getItem(int index);
    int getItemSize();
-
    string searchItem(int index);
    string getItemImage(string itemname);
 };
