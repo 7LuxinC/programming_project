@@ -20,7 +20,7 @@ private:
 public:
     Item (string description, string imgPath);
     Item (string description="",int potion=0, string imgPath="");
-	string getShortDescription();
+    string getShortDescription();
     string getLongDescription();
     int getPotion();
     void setPotion(int numPotion);

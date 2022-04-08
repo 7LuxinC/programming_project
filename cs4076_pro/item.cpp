@@ -12,6 +12,7 @@ Item::Item(string inDescription,int numPotion, string imgPath) {
     imagePath = imgPath;
 }
 
+
 /**
  * @brief Item::Item    overloading constructor
  * @param inDescription

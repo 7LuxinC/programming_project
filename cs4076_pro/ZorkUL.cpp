@@ -3,8 +3,17 @@
 #include "ZorkUL.h"
 
 
+using namespace std;
 
 ZorkUL::~ZorkUL(){
+    delete currentRoom;
+
+    for(int i = 0; i<arrSize;i++){
+        delete rooms[i];
+    }
+
+
+
 }
 
 

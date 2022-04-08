@@ -10,7 +10,7 @@
 #include "ZorkUL.h"
 #include "Character.h"
 
-int num = 0;
+int num = 0;        //for wordle game trails
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -71,14 +71,17 @@ QString MainWindow::toQstr(string str){
 void MainWindow::on_messageBtn_clicked()
 {
     //this =this class
-    QMessageBox::about(this,"---WELCOME ヾ(*´▽‘*)ﾉ---", "You are now standing in the land of Loswilire and you are the new guardiance the five-colored spiritual stones to take if they have enough power to prevent any enemy come to this land.\n\n"
-                                                       "One day, you find that the light of the five-colored spiritual stone is flashing, which means the energy almost run out!\n\n"
-                                                       "You searched a lot of books for a solution and you've finally found a way. It is recorded in one of the books that every 500 years, the energy of the five-color stone will weaken, "
-                                                       "and it is necessary to gather all the elements of gold, wood, water, fire, and earth to reactivate the energy source.\n\n"
-                                                       "You will be ready to embark on a fantastic adventure. Check out the info to before starting the game.\n\n"
-                                                       "Before transfer magical energy, you have to activate magical potion in sky city."
-                                                       "To transfer the magical energy to the 5-colored spirtual stone,you have to collect 5 element and get 100% of power energy in magic potions.\n\n"
-                                                       "<(￣︶￣)↗ Let's starrrt!!!!\n\n");
+    QMessageBox::about(this,"---WELCOME ヾ(*´▽‘*)ﾉ---", "You are now standing in the land of Loswilire and you are the new guardiance the five-colored "
+                                                       "spiritual stones to take if they have enough power to prevent any enemy come to this land.\n\n"
+                                                       "One day, you find that the light of the five-colored spiritual stone is flashing, which means "
+                                                       "the energy almost run out!\n\nYou searched a lot of books for a solution and you've finally "
+                                                       "found a way. It is recorded in one of the books that every 500 years, the energy of the five-color "
+                                                       "stone will weaken,and it is necessary to gather all the elements of gold, wood, water, fire, "
+                                                       "and earth to reactivate the energy source.\n\nYou will be ready to embark on a fantastic adventure. "
+                                                       "Check out the info to before starting the game.\n\nBefore transfer magical energy, you have to "
+                                                       "activate magical potion in sky city.To transfer the magical energy to the 5-colored spirtual stone,"
+                                                       "you have to collect 5 element and get 100% of power energy in magic potions.\n\n<(￣︶￣)↗ Let's"
+                                                       "starrrt!!!!\n\n");
 }
 
 
@@ -254,7 +257,8 @@ void MainWindow::collectItems(){
 
     int rowOfItems = ui -> listWidget ->currentRow();               //get currentrow index in the list
 
-    QListWidgetItem *it = ui ->listWidget->takeItem(rowOfItems);  //--assign the specific item  from the list to the list item in order to delte it in list
+    QListWidgetItem *it = ui ->listWidget->takeItem(rowOfItems);  //--assign the specific item  from the list
+                                                                  //to the list item in order to delte it in list
 
 
     string foundItem = zorker->getCurrentRoom()->getItem(rowOfItems);       //search matching item in room

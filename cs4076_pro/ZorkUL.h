@@ -34,7 +34,7 @@ public:
     string teleport();
     Room* getCurrentRoom();
     bool hasItems();
-    virtual string getShortDescription();
+    virtual string getShortDescription();           //virtual function
 
 protected:
     string printWelcome();
